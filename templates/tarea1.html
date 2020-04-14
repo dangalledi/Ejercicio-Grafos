@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% extends "layout.html" %} {% block content %}
+
+<div class="graphs">
+    <form>
+        <div class="form-group">
+            <label for="vertices">Numero de vertices</label>
+            <input type="text" class="form-control" name="vertices" aria-describedby="emailHelp">
+
+        </div>
+
+        <div class="form-group">
+            <label for="aristas">Aristas</label>
+            <input type="text" class="form-control" name="aristas" placeholder="ejemplo : (1,2),(2,3),(1-3)...(n,n)">
+            <small id="emailHelp" class="form-text text-muted">(a,b) no dirigido | (a-b) dirigido</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+</div>
+
+{% endblock%}
