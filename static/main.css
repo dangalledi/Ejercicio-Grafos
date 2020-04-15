@@ -1,4 +1,5 @@
 body {
+    /* Color de fondo de la appweb */
     background: #42275a;
     /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #734b6d, #42275a);

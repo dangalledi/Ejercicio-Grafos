@@ -5,14 +5,18 @@ from config import Config
 app = Flask(__name__)
 app.config.from_object(Config)
 
-@app.route('/')
+# Ruta home 
+@app.route('/')   
 def home():
     return render_template('home.html')
 
-@app.route('/tarea1', methods=['GET', 'POST'])
+# Ruta tarea 1 
+@app.route('/tarea1', methods=['GET', 'POST'])      
 def tarea1():
-    form = IngresoGrafo()
+    form = IngresoGrafo()      # se guardan los datos obtenidos del formulario  
+
     return render_template("tarea1.html",title="ingrese grafo", form=form)
 
+#Se inicializa el servidor
 if __name__=='__main__':
     app.run(debug=True)
