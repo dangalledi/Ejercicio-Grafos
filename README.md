@@ -20,7 +20,7 @@ python index.py
 + Jennifer Portiño
 + Diego Tapia
 + Oscar Peñaloza
-+ gary
++ Edgar Matus
 + Daniela Galleguillos
 
 [ Readme en construcción ] 
