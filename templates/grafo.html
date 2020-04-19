@@ -1,7 +1,7 @@
-<html>
+<!DOCTYPE html> {% extends "layout.html" %} {% block content %}
 
 <head>
-    <title>Graph</title>
+    <title>Grafo</title>
 </head>
 
 <body>
@@ -9,4 +9,5 @@
     <img src="{{ url_for('graph', nodes=nodes) }}" alt="Complete Graph with {{ nodes }} nodes" height="200" />
 </body>
 
-</html>
+
+{% endblock %}

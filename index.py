@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, url_for, redirect, send_file
 from forms import IngresoGrafo
 from config import Config
+from tareas.tarea1 import ingresa_grafo
 
 #Librerias para los grafos
 import matplotlib.pyplot as plt
@@ -10,6 +11,8 @@ import networkx as nx
 app = Flask(__name__)
 app.config.from_object(Config)
 
+grafos=[]
+
 # Ruta home 
 @app.route('/')   
 def home():
@@ -18,14 +21,17 @@ def home():
 # Ruta tarea 1 
 @app.route('/tarea1', methods=['GET', 'POST'])      
 def tarea1():
-    form = IngresoGrafo()      # se guardan los datos obtenidos del formulario  
+    grafo = IngresoGrafo(request.form)      # se guardan los datos obtenidos del formulario  
+    if request.method == 'POST':
+        print (grafo.vertices.data)
+        print (grafo.aristas.data)
 
-    return render_template("tarea1.html",title="ingrese grafo", form=form)
+    return render_template("tarea1.html", form = grafo)
 
 
 @app.route('/<int:nodes>')
 def ind(nodes):
-    return render_template("image.html", nodes=nodes)
+    return render_template("grafo.html", nodes=nodes)
 
 @app.route('/graph/<int:nodes>')
 def graph(nodes):

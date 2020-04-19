@@ -5,13 +5,12 @@
     <form action=" " method="post" novalidate>
         <p class="lead">Ingresa los datos solicitados para dibujar el grafo</p>
         <p>
-            {{ form.vertices.label }}<br> {{ form.vertices(size=32) }} {% for error in form.vertices.errors %}
-            <!-- Se tiene una validacion de errores.. {% for error in form... xD -->
+            {{ grafo.vertices.label }}<br> {{ grafo.vertices(size=32) }} {% for error in grafo.vertices.errors %}
+            <!-- Se tiene una validacion de errores..  for error in grafo... xD -->
             <span style="color: red;">[{{ error }}]</span> {% endfor %}
-            <!--aunque no se muy bien que valida, ahi me preguntan bien de donde saque eso xD -->
         </p>
         <p>
-            {{ form.aristas.label }}<br> {{ form.aristas(size=32) }} {% for error in form.aristas.errors %}
+            {{ grafo.aristas.label }}<br> {{ grafo.aristas(size=32) }} {% for error in grafo.aristas.errors %}
             <span style="color: red;">[{{ error }}]</span> {% endfor %}
         </p>
         <p>{{ form.submit() }}</p>
