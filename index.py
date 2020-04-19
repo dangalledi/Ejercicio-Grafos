@@ -25,13 +25,12 @@ def tarea1():
     if request.method == 'POST':
         print (grafo.vertices.data)
         print (grafo.aristas.data)
+        grafos=[grafo.vertices.data,grafo.aristas.data]
+        print (grafos)
+        return render_template("grafo.html", nodes=grafo.vertices.data)
 
-    return render_template("tarea1.html", form = grafo)
+    return render_template("tarea1.html", grafo = grafo)
 
-
-@app.route('/<int:nodes>')
-def ind(nodes):
-    return render_template("grafo.html", nodes=nodes)
 
 @app.route('/graph/<int:nodes>')
 def graph(nodes):

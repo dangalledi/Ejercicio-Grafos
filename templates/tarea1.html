@@ -1,6 +1,7 @@
 <!DOCTYPE html> {% extends "layout.html" %} {% block content %}
 
 <!-- dentro del container "jumbotron" agregado desde bootstrap, se encuentra el formulario para ingresar el grafo-->
+
 <div class="jumbotron">
     <form action=" " method="post" novalidate>
         <p class="lead">Ingresa los datos solicitados para dibujar el grafo</p>
@@ -13,8 +14,7 @@
             {{ grafo.aristas.label }}<br> {{ grafo.aristas(size=32) }} {% for error in grafo.aristas.errors %}
             <span style="color: red;">[{{ error }}]</span> {% endfor %}
         </p>
-        <p>{{ form.submit() }}</p>
+        <p>{{ grafo.submit() }}</p>
     </form>
 </div>
-
 {% endblock %}

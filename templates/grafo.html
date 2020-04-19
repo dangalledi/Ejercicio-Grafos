@@ -1,13 +1,11 @@
 <!DOCTYPE html> {% extends "layout.html" %} {% block content %}
 
-<head>
-    <title>Grafo</title>
-</head>
-
 <body>
-    <h1>Graph</h1>
-    <img src="{{ url_for('graph', nodes=nodes) }}" alt="Complete Graph with {{ nodes }} nodes" height="200" />
+    <div class="jumbotron">
+        <h1 class="display-5">Grafo</h1>
+        <p class="lead">Se genero un grafo completo de {{ nodes }} nodos.</p>
+        <img src="{{ url_for('graph', nodes=nodes) }}" alt="Un grafo completo con {{ nodes }} nodos" height="200" />
+    </div>
 </body>
-
 
 {% endblock %}
