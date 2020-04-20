@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired
 
 #Creacion de clases donde se reciben los datos del formulario 
 class IngresoGrafo(Form): 
-    #ipo = SelectField(u'tipo',choices = [('Completo','completo'),('Direccionado','direccionado')])
+    tipo = SelectField(u'tipo',choices = [('simple','Simple'),('direccionado','Direccionado')])
     vertices = StringField('Vertices',validators=[DataRequired()])
     aristas = StringField('Aristas',validators=[DataRequired()])
     submit = SubmitField('Ingresar')
