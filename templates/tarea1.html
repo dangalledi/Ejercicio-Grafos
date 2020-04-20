@@ -1,21 +1,28 @@
 <!DOCTYPE html> {% extends "layout.html" %} {% block content %}
 
 <!-- dentro del container "jumbotron" agregado desde bootstrap, se encuentra el formulario para ingresar el grafo-->
+
 <div class="jumbotron">
     <form action=" " method="post" novalidate>
         <p class="lead">Ingresa los datos solicitados para dibujar el grafo</p>
+        <p>Seleccione el tipo de grafo</p>
         <p>
-            {{ form.vertices.label }}<br> {{ form.vertices(size=32) }} {% for error in form.vertices.errors %}
-            <!-- Se tiene una validacion de errores.. {% for error in form... xD -->
-            <span style="color: red;">[{{ error }}]</span> {% endfor %}
-            <!--aunque no se muy bien que valida, ahi me preguntan bien de donde saque eso xD -->
+        <select name = 'tipo' id="tipo">  <!--necesario crear el dato tipo en el formulario-->
+            <option value = "simple">Simple</option>
+            <option value = "direccionado">Direccionado</option>
+        </select>
+        <input type = 'checkbox' name = 'etiquetado' value = 'true'> Etiquetado <!--checkbox pa saber si se etiqueta o no-->
         </p>
         <p>
-            {{ form.aristas.label }}<br> {{ form.aristas(size=32) }} {% for error in form.aristas.errors %}
+            {{ grafo.vertices.label }}<br> {{ grafo.vertices(size=32) }} {% for error in grafo.vertices.errors %}
+            <!-- Se tiene una validacion de errores..  for error in grafo... xD -->
             <span style="color: red;">[{{ error }}]</span> {% endfor %}
         </p>
-        <p>{{ form.submit() }}</p>
+        <p>
+            {{ grafo.aristas.label }}<br> {{ grafo.aristas(size=32) }} {% for error in grafo.aristas.errors %}
+            <span style="color: red;">[{{ error }}]</span> {% endfor %}
+        </p>
+        <p>{{ grafo.submit() }}</p>
     </form>
 </div>
-
 {% endblock %}

@@ -2,14 +2,16 @@
 
 Esta es una aplicación web que muestra las tareas desarrolladas en el ramo de Grafos y lenguajes formales.
 
-## Installation
+## Instalación de dependencias
 
-Clone el repositorio y ejecute lo siguiente:
+En el proyecto se distribuye un fichero (requirements.txt) con todas las dependencias. Para instalarlas
+basta con ejectuar:
 
 ```bash
-pip install flask[ALL]
+pip install -r requirements.txt
 ```
-ya que no se esta trabajando en un entorno virtual.
+
+## Ejecución con el servidor
 
 Y luego ejecute index.py
 
