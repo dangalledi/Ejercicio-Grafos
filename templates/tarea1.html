@@ -5,6 +5,11 @@
 <div class="jumbotron">
     <form action=" " method="post" novalidate>
         <p class="lead">Ingresa los datos solicitados para dibujar el grafo</p>
+        <p>Seleccione el tipo de grafo</p>
+        <select id="tipo">  <!--necesario crear el dato tipo en el formulario-->
+            <option value = "completo">Completo</option>
+            <option value = "direccionado">Direccionado</option>
+        </select>
         <p>
             {{ grafo.vertices.label }}<br> {{ grafo.vertices(size=32) }} {% for error in grafo.vertices.errors %}
             <!-- Se tiene una validacion de errores..  for error in grafo... xD -->
