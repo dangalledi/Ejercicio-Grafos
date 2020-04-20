@@ -26,6 +26,7 @@ def tarea1():
         print (grafo.vertices.data)
         print (grafo.aristas.data)
         print (grafo.tipo.data)
+        print (grafo.etiquetado.data)
         grafos=[grafo.vertices.data,grafo.aristas.data]
         print (grafos)
         return render_template("grafo.html", nodes=grafo.vertices.data)
