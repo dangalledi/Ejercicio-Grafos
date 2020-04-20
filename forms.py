@@ -1,9 +1,10 @@
-from wtforms import Form
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, validators
-
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField,Form
+from wtforms.validators import DataRequired
 
 #Creacion de clases donde se reciben los datos del formulario 
 class IngresoGrafo(Form): 
-    vertices= StringField('Vertices',[validators.DataRequired(),validators.length(min=1,max=3, message='Ingrese la cantidad de vertices')])
-    aristas= StringField('Aristas',[validators.DataRequired(),validators.length(min=1,max=3, message='Ingrese la cantidad de aristas')])
+    etiquetado = BooleanField() # para saber si se etiqueta en la creación
+    tipo = SelectField(u'tipo',choices = [('simple','Simple'),('direccionado','Direccionado')])
+    vertices = StringField('Vertices',validators=[DataRequired()])
+    aristas = StringField('Aristas',validators=[DataRequired()])
     submit = SubmitField('Ingresar')
