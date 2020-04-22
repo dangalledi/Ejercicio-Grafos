@@ -4,6 +4,8 @@ from config import Config
 from tareas.tarea1 import ingresa_grafo
 
 #Librerias para los grafos
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from io import BytesIO
 import networkx as nx
