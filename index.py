@@ -4,6 +4,8 @@ from config import Config
 from tareas.tarea1 import ingresa_grafo
 
 #Librerias para los grafos
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from io import BytesIO
 import networkx as nx
@@ -19,7 +21,7 @@ def home():
     return render_template('home.html')
 
 # Ruta tarea 1 
-@app.route('/tarea1', methods=['GET', 'POST'])      
+@app.route('/tarea1', methods = ['GET', 'POST'])      
 def tarea1():
     grafo = IngresoGrafo(request.form)      # se guardan los datos obtenidos del formulario  
     if request.method == 'POST':
@@ -29,13 +31,14 @@ def tarea1():
         print (grafo.etiquetado.data)
         grafos=[grafo.vertices.data,grafo.aristas.data]
         print (grafos)
-        return render_template("grafo.html", nodes=grafo.vertices.data)
+        print(grafo.nombre.data)
+        return render_template("grafo.html", nodes=grafo.vertices.data,tipo=grafo.tipo.data,nombre=grafo.nombre.data)
 
     return render_template("tarea1.html", grafo = grafo)
 
 
-@app.route('/graph/<int:nodes>')
-def graph(nodes):
+@app.route('/graph/<int:nodes><string:nombre><string:tipo>')
+def graph(nodes,tipo,nombre):
     G = nx.complete_graph(nodes)
     nx.draw(G)
 
@@ -44,7 +47,7 @@ def graph(nodes):
     img.seek(0) # writing moved the cursor to the end of the file, reset
     plt.clf() # clear pyplot
 
-    return send_file(img, mimetype='image/png')
+    return send_file(img, mimetype = 'image/png')
 
 #Se inicializa el servidor
 if __name__=='__main__':
