@@ -19,7 +19,7 @@ def home():
     return render_template('home.html')
 
 # Ruta tarea 1 
-@app.route('/tarea1', methods=['GET', 'POST'])      
+@app.route('/tarea1', methods = ['GET', 'POST'])      
 def tarea1():
     grafo = IngresoGrafo(request.form)      # se guardan los datos obtenidos del formulario  
     if request.method == 'POST':
@@ -35,7 +35,7 @@ def tarea1():
     return render_template("tarea1.html", grafo = grafo)
 
 
-@app.route('/graph/<int:nodes>')
+@app.route('/graph/<int:nodes><string:nombre><string:tipo>')
 def graph(nodes,tipo,nombre):
     G = nx.complete_graph(nodes)
     nx.draw(G)
@@ -45,7 +45,7 @@ def graph(nodes,tipo,nombre):
     img.seek(0) # writing moved the cursor to the end of the file, reset
     plt.clf() # clear pyplot
 
-    return send_file(img, mimetype='image/png')
+    return send_file(img, mimetype = 'image/png')
 
 #Se inicializa el servidor
 if __name__=='__main__':
