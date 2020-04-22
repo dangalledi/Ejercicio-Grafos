@@ -14,6 +14,10 @@
         <input type = 'checkbox' name = 'etiquetado' value = 'true'> Etiquetado <!--checkbox pa saber si se etiqueta o no-->
         </p>
         <p>
+            {{ grafo.nombre.label }}<br> {{ grafo.nombre(size=32) }} {% for error in grafo.nombre.errors %}
+            <span style="color: red;">[{{ error }}]</span> {% endfor %}
+        </p>
+        <p>
             {{ grafo.vertices.label }}<br> {{ grafo.vertices(size=32) }} {% for error in grafo.vertices.errors %}
             <!-- Se tiene una validacion de errores..  for error in grafo... xD -->
             <span style="color: red;">[{{ error }}]</span> {% endfor %}
