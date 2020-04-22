@@ -15,8 +15,11 @@ app.config.from_object(Config)
 
 grafos=[]
 
-# Ruta home 
 @app.route('/')   
+def pre_load():
+    return render_template('pre-load.html')
+# Ruta home 
+@app.route('/home')   
 def home():
     return render_template('home.html')
 
