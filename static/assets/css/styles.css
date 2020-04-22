@@ -1,0 +1,60 @@
+body {
+  font-family: 'Roboto';
+  
+}
+
+#img{
+  text-align: center;
+  margin: auto;
+}
+
+#info {
+  text-align: center;
+  padding: 25px;
+  background-image: url(../img/thor.jpg);
+  background-size: cover;
+  
+}
+#info2 {
+  text-align: center;
+  padding: 50px ;
+  background-image: url(../img//background.jpg);
+  background-size: cover;
+}
+
+#info .jumbotron, #info2 .jumbotron  {
+  border-radius: 30px;
+  padding: 50px ;
+  background-color: rgba(255,255,255,0.0);
+  max-width: 800px;
+  margin: auto;
+}
+
+@media (min-width: 991px) {
+  #info, #info2,#img {
+    padding: 20px;
+  }
+  
+}
+@media (max-width: 320px) {
+  #info .jumbotron, #info2 .jumbotron,#img{
+    padding: 20px;
+  }
+}
+
+#boton {
+  padding: 5px;
+  margin: 40px;
+}
+
+}
+#text-info {
+  padding: 60px;
+}
+
+
+
+
+
+
+

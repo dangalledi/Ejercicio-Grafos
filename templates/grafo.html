@@ -1,11 +1,13 @@
-<!DOCTYPE html> {% extends "layout.html" %} {% block content %}
+{% extends "layout.html" %} {% block content %}
 
-<body>
-    <div class="jumbotron">
+
+    <div id="info">
+        <div class="jumbotron"><center>
         <h1 class="display-5">Grafo</h1>
         <p class="lead">Se generó un grafo de nombre {{nombre}} del tipo {{tipo}} de {{ nodes }} nodos.</p>
-        <img src="{{ url_for('graph', nombre=nombre, tipo=tipo, nodes=nodes) }}" alt="Un grafo de tipo {{tipo}} de {{ nodes }} nodos" height="300" class = "center"/>
+        <img src="{{ url_for('graph', nombre=nombre, tipo=tipo, nodes=nodes) }}" alt="Un grafo de tipo {{tipo}} de {{ nodes }} nodos" height="500" class = "center"/></center>
     </div>
-</body>
+    </div>
+
 
 {% endblock %}
