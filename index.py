@@ -30,13 +30,13 @@ def tarea1():
         grafos=[grafo.vertices.data,grafo.aristas.data]
         print (grafos)
         print(grafo.nombre.data)
-        return render_template("grafo.html", nodes=grafo.vertices.data)
+        return render_template("grafo.html", nodes=grafo.vertices.data,tipo=grafo.tipo.data,nombre=grafo.nombre.data)
 
     return render_template("tarea1.html", grafo = grafo)
 
 
 @app.route('/graph/<int:nodes>')
-def graph(nodes):
+def graph(nodes,tipo,nombre):
     G = nx.complete_graph(nodes)
     nx.draw(G)
 
