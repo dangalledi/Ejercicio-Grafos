@@ -1,5 +1,4 @@
-from wtforms import Form
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField,Form
 from wtforms.validators import DataRequired
 
 #Creacion de clases donde se reciben los datos del formulario 
