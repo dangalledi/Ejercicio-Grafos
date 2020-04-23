@@ -16,15 +16,18 @@
         <p>
             {{ grafo.nombre.label }}<br> {{ grafo.nombre(size=32) }} {% for error in grafo.nombre.errors %}
             <span style="color: red;">[{{ error }}]</span> {% endfor %}
+            <small id="emailHelp" class="form-text text-muted">Ingrese el nombre del Grafo.</small>
         </p>
         <p>
             {{ grafo.vertices.label }}<br> {{ grafo.vertices(size=32) }} {% for error in grafo.vertices.errors %}
             <!-- Se tiene una validacion de errores..  for error in grafo... xD -->
             <span style="color: red;">[{{ error }}]</span> {% endfor %}
+            <small id="emailHelp" class="form-text text-muted">Ingrese la cantidad de Vertices.</small>
         </p>
         <p>
             {{ grafo.aristas.label }}<br> {{ grafo.aristas(size=32) }} {% for error in grafo.aristas.errors %}
             <span style="color: red;">[{{ error }}]</span> {% endfor %}
+            <small id="emailHelp" class="form-text text-muted">Ingrese la cantidad de Aristas</small>
         </p>
         <p>{{ grafo.submit() }}</p>
     </form>
