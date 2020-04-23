@@ -13,7 +13,7 @@ import networkx as nx
 app = Flask(__name__)
 app.config.from_object(Config)
 
-grafos=[]
+grafos = []
 
 # Ruta home 
 @app.route('/')   
@@ -32,7 +32,7 @@ def tarea1():
         grafos=[grafo.vertices.data,grafo.aristas.data]
         print (grafos)
         print(grafo.nombre.data)
-        return render_template("grafo.html", nodes=grafo.vertices.data,tipo=grafo.tipo.data,nombre=grafo.nombre.data)
+        return render_template("grafo.html", nodes = grafo.vertices.data, tipo = grafo.tipo.data, nombre = grafo.nombre.data)
 
     return render_template("tarea1.html", grafo = grafo)
 
@@ -41,7 +41,6 @@ def tarea1():
 def graph(nodes,tipo,nombre):
     G = nx.complete_graph(nodes)
     nx.draw(G)
-
     img = BytesIO() # file-like object for the image
     plt.savefig(img) # save the image to the stream
     img.seek(0) # writing moved the cursor to the end of the file, reset

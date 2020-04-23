@@ -3,7 +3,7 @@
 <!-- dentro del container "jumbotron" agregado desde bootstrap, se encuentra el formulario para ingresar el grafo-->
 
 <div class="jumbotron">
-    <form action=" " method="post" novalidate>
+    <form action=" " method="POST" novalidate>
         <p class="lead">Ingresa los datos solicitados para dibujar el grafo</p>
         <p>Seleccione el tipo de grafo</p>
         <p>
@@ -23,6 +23,7 @@
             <span style="color: red;">[{{ error }}]</span> {% endfor %}
         </p>
         <p>
+            <!--CREAR SCRIPT PARA INGRESAR LAS ARISTAS-->
             {{ grafo.aristas.label }}<br> {{ grafo.aristas(size=32) }} {% for error in grafo.aristas.errors %}
             <span style="color: red;">[{{ error }}]</span> {% endfor %}
         </p>
