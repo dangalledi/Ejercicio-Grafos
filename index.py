@@ -23,11 +23,9 @@ def home():
 # Ruta tarea 1 
 @app.route('/tarea1', methods = ['GET', 'POST'])      
 def tarea1():
-    grafo = ClaseGrafo(request.form)      # se guardan los datos obtenidos del formulario  
-    aux1 = grafo.nodos
-    aux2 = str(aux1)
+    grafo = ClaseGrafo(request.form)      # se guardan los datos obtenidos del formulario
     nodos = []
-    nodos = aux2.split(',')
+    nodos = grafo.nodos.data.split(',')
     if request.method == 'POST':
         #print (grafo.vertices.data)
         print (grafo.tipo.data)

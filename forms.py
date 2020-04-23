@@ -7,5 +7,5 @@ class ClaseGrafo(FlaskForm):
     nombre = StringField("Nombre",validators=[DataRequired()])
     etiquetado = BooleanField() # para saber si se etiqueta en la creación
     tipo = SelectField(u'tipo',choices = [('simple','Simple'),('direccionado','Direccionado')])
-    nodos = StringField('Vertices',validators=[DataRequired()])
+    nodos = StringField('Vertices\n(Ej: Talca, Paris, Londres)',validators=[DataRequired()])
     submit = SubmitField('Ingresar')
