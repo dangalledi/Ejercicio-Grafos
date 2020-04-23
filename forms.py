@@ -1,11 +1,11 @@
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField,Form
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField
 from wtforms.validators import DataRequired
 
 #Creacion de clases donde se reciben los datos del formulario 
-class IngresoGrafo(Form): 
+class ClaseGrafo(FlaskForm): 
     nombre = StringField("Nombre",validators=[DataRequired()])
     etiquetado = BooleanField() # para saber si se etiqueta en la creación
     tipo = SelectField(u'tipo',choices = [('simple','Simple'),('direccionado','Direccionado')])
-    vertices = StringField('Vertices',validators=[DataRequired()])
-    aristas = StringField('Aristas',validators=[DataRequired()])
+    nodos = StringField('Vertices',validators=[DataRequired()])
     submit = SubmitField('Ingresar')

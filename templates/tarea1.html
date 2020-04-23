@@ -18,13 +18,8 @@
             <span style="color: red;">[{{ error }}]</span> {% endfor %}
         </p>
         <p>
-            {{ grafo.vertices.label }}<br> {{ grafo.vertices(size=32) }} {% for error in grafo.vertices.errors %}
+            {{ grafo.nodos.label }}<br> {{ grafo.nodos(size=32) }} {% for error in grafo.nodos.errors %}
             <!-- Se tiene una validacion de errores..  for error in grafo... xD -->
-            <span style="color: red;">[{{ error }}]</span> {% endfor %}
-        </p>
-        <p>
-            <!--CREAR SCRIPT PARA INGRESAR LAS ARISTAS-->
-            {{ grafo.aristas.label }}<br> {{ grafo.aristas(size=32) }} {% for error in grafo.aristas.errors %}
             <span style="color: red;">[{{ error }}]</span> {% endfor %}
         </p>
         <p>{{ grafo.submit() }}</p>
