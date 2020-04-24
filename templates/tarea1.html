@@ -22,12 +22,12 @@
             {{ grafo.vertices.label }}<br> {{ grafo.vertices(size=32) }} {% for error in grafo.vertices.errors %}
             <!-- Se tiene una validacion de errores..  for error in grafo... xD -->
             <span style="color: red;">[{{ error }}]</span> {% endfor %}
-            <small id="emailHelp" class="form-text text-muted">Ingrese la cantidad de Vertices.</small>
+            <small id="emailHelp" class="form-text text-muted">Ingrese la cantidad de Vertices.      Ej: 5      </small>
         </p>
         <p>
             {{ grafo.aristas.label }}<br> {{ grafo.aristas(size=32) }} {% for error in grafo.aristas.errors %}
             <span style="color: red;">[{{ error }}]</span> {% endfor %}
-            <small id="emailHelp" class="form-text text-muted">Ingrese la cantidad de Aristas</small>
+            <small id="emailHelp" class="form-text text-muted">Ingrese la cantidad de Aristas.       Ej: (1,5)(1,4)     </small>
         </p>
         <p>{{ grafo.submit() }}</p>
     </form>
