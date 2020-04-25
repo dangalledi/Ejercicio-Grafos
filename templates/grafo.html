@@ -1,13 +1,15 @@
-{% extends "layout.html" %} {% block content %}
+<!DOCTYPE html> {% extends "layout.html" %} {% block content %}
 
-
-    <div id="info">
-        <div class="jumbotron"><center>
+<body>
+    <div class="jumbotron" class="center">
         <h1 class="display-5">Grafo</h1>
-        <p class="lead">Se generó un grafo de nombre {{nombre}} del tipo {{tipo}} de {{ nodes }} nodos.</p>
-        <img src="{{ url_for('graph', nombre=nombre, tipo=tipo, nodes=nodes) }}" alt="Un grafo de tipo {{tipo}} de {{ nodes }} nodos" height="500" class = "center"/></center>
+        <p class="lead">Se generó un grafo  {{data}}</p> 
+        <img src="{{ url_for('graph',data=data) }}"  height="300" class = "center"/>
     </div>
-    </div>
+</body>
+
+<!-- Muestra se agrego un grafo + "los datos ingresados separados con "$" " -->
 
 
+<!--  del tipo {{tipo}} de {{ nodes }} nodos. -->
 {% endblock %}

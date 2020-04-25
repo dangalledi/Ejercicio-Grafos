@@ -1,22 +1,11 @@
 {% extends "layout.html" %} {% block content %}
 
-<div id="info">
-    <div class="jumbotron" >
-        <h1><strong>BIENVENIDO</strong></h1>
-        <p id="text-info">Con esta pagina web seras capaz de generar imagenes de distintos tipos de grafos, encontrar el camino mas corto entre dos vertices y ademas conocer la categoria a la cual pertenece.</p>
-        <p id="boton"><a href="/tarea1" class="btn btn-primary pulse animated infinite" role="button">Crear</a></p>
-    </div>
+<div class="jumbotron">
+    <h1 class="display-4">Hola, Bienvenido/a a mi pagina</h1>
+    <p class="lead">Esta es una pagina programada en python con el framework flask, donde se subiran las tareas de grafos.</p>
+    <hr class="my-4">
+    <p>Universidad Tecnologia Metropolitana - 1er semestre 2020.</p>
+    <a class="btn btn-primary btn-lg" href="/tarea1" role="button">Tarea 1</a>
 </div>
-
-
-
-<div id="info2">
-    <div class="jumbotron">
-        <h1><strong>COMO USAR</strong></h1>
-        <p id="text-info">Para agregar un grafo debes indicar si es dirigido o no, sin importar el orden de ingreso, uno puede asociar el nodo [1] con [2] separandolo con una "," y a su vez separando las distintas conexiones con ";"<br>
-            ejemplo para [1] conectado a [2], [2] conectado a [3] y [4] conectado a si mismo <br>
-            <strong>1,2;2,3;4,4</strong>
-    </div>
-</div>   
 
 {% endblock%}

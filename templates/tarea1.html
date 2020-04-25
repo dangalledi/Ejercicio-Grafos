@@ -1,42 +1,115 @@
-<!DOCTYPE html> {% extends "layout.html" %} {% block content %}
+{% extends "layout.html" %} {% block content %}
 
 <!-- dentro del container "jumbotron" agregado desde bootstrap, se encuentra el formulario para ingresar el grafo-->
-<div id=info>
+
 <div class="jumbotron">
+    <form method="POST" action="" novalidate>
+                        <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Formulario</legend>
+
+                        <div class="form-group">
+                            <div class="form-check">
+                                {{ form.dirigido(value='n') }}
+                                <label class="form-check-label">¿Es dirigido? De lo contrario sera simple.</label>
+                            </div>
+                        </div>
 
 
-    <form action=" " method="post" novalidate>
-        <fieldset class="form-group">
 
-        <legend class="border-bottom mb-4">Grafos y lenguajes Formales</legend>
-        <p class="lead">Ingresa los datos solicitados para dibujar el grafo</p>
-        <p>Seleccione el tipo de grafo</p>
-        <p>
-        <select name = 'tipo' id="tipo">  <!--necesario crear el dato tipo en el formulario-->
-            <option value = "simple">Simple</option>
-            <option value = "direccionado">Direccionado</option>
-        </select>
-        <input type = 'checkbox' name = 'etiquetado' value = 'true'> Etiquetado <!--checkbox pa saber si se etiqueta o no-->
-        </p>
-        <p>
-            {{ grafo.nombre.label }}<br> {{ grafo.nombre(class="form-control form-control-lg") }} {% for error in grafo.nombre.errors %}
-            <span style="color: red;">[{{ error }}]</span> {% endfor %}
-        </p>
-        <p>
-            {{ grafo.vertices.label }}<br> {{ grafo.vertices(class="form-control form-control-lg") }} {% for error in grafo.vertices.errors %}
-            <!-- Se tiene una validacion de errores..  for error in grafo... xD -->
-            <span style="color: red;">[{{ error }}]</span> {% endfor %}
-        </p>
-        <p>
-            {{ grafo.aristas.label }}<br> {{ grafo.aristas(class="form-control form-control-lg") }} {% for error in grafo.aristas.errors %}
-            <span style="color: red;">[{{ error }}]</span> {% endfor %}
-        </p>
-        <p>{{ grafo.submit(class="btn btn-outline-info") }}</p>
+                        
+                        <div class="form-group">
+                            {{form.nombre_grafico.label(class="form-control-label")}}
+<!-- Validador inicio -->
+{%if form.nombre_grafico.errors %}
+{{form.nombre_grafico(class="form-control form-control-lg is-invalid")}}
 
-        </fieldset>
-    </form>
-
+<div class="invalid-feedback">
+    {% for errors in form.nombre_grafico.errors %}
+    <span>{{error}}</span>
+    {%endfor%}
+{% else %}
+{{form.nombre_grafico(class="form-control form-control-lg")}}                  
+{% endif %}
 
 </div>
+
+
+
+
+
+
+<div class="form-group">
+{{form.nombres_nodos.label(class="form-control-label")}}
+<!-- Validador inicio -->
+{%if form.nombres_nodos.errors %}
+{{form.nombres_nodos(class="form-control form-control-lg is-invalid")}}
+
+<div class="invalid-feedback">
+    {% for errors in form.nombres_nodos.errors %}
+    <span>{{error}}</span>
+    {%endfor%}
+{% else %}
+{{form.nombres_nodos(class="form-control form-control-lg")}}                  
+{% endif %}
+</div>
+
+
+
+                        <div class="form-group">
+                            {{form.edge.label(class="form-control-label")}}
+
+                            <!-- Validador inicio -->
+
+                            {%if form.edge.errors %}
+                            {{form.edge(class="form-control form-control-lg is-invalid")}}
+
+                            <div class="invalid-feedback">
+                                {% for errors in form.edge.errors %}
+                                <span>{{error}}</span>
+                                {%endfor%}
+                            {% else %}
+                            {{form.edge(class="form-control form-control-lg")}}                  
+                            {% endif %}
+                            </div>
+
+                        <!-- validador termino -->
+                
+
+
+
+
+
+
+
+
+
+                        <div class="form-group">
+                            {{form.pesos.label(class="form-control-label")}}
+
+                            <!-- Validador inicio -->
+
+                            {%if form.pesos.errors %}
+                            {{form.pesos(class="form-control form-control-lg is-invalid")}}
+
+                            <div class="invalid-feedback">
+                                {% for errors in form.pesos.errors %}
+                                <span>{{error}}</span>
+                                {%endfor%}
+                            {% else %}
+                            {{form.pesos(class="form-control form-control-lg")}}                  
+                            {% endif %}
+                            </div>
+
+                        <!-- validador termino -->
+                    </fieldset>
+
+
+                        <div class="form-group">
+                        {{ form.submit(class="btn btn-outline-info") }}
+                        </div>
+        </form>
+
+    </div>
+</div>  
 </div>
 {% endblock %}
