@@ -23,22 +23,21 @@ def home():
 # Ruta tarea 1 
 @app.route('/tarea1', methods = ['GET', 'POST'])      
 def tarea1():
-    grafo = ClaseGrafo(request.form)      # se guardan los datos obtenidos del formulario
-    nodos = []
-    nodos = grafo.nodos.data.split(',')
+    grafo = ClaseGrafo(request.form)# se guardan los datos obtenidos del formulario
     if request.method == 'POST':
-        #print (grafo.vertices.data)
-        print (grafo.tipo.data)
-        print (grafo.etiquetado.data)
-        #grafos=[grafo.vertices.data,grafo.aristas.data]
-        #print (grafos)
-        print(grafo.nombre.data)
-        print (nodos)
-        print (len(nodos))
-        return render_template("grafo.html", nodes = len(nodos), tipo = grafo.tipo.data, nombre = grafo.nombre.data)
-
+        print("nombre del grafo:",grafo.nombre.data)
+        #print ("eitquetado:",grafo.etiquetado.data)
+        print ("tipo de grafo:",grafo.tipo.data)
+        if  (grafo.nodos.data).isdigit() == True: #grafo.etiquetado.data == False and# de ser dígitos lo toma como la cantidad de nodos
+            setattr(grafo,'vertices',int(grafo.nodos.data))  
+            return render_template("grafo.html", nodes = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data)
+        else:
+            nodos = grafo.nodos.data.split(',') # de no ser dígitos lo toma como etiquetas y cantidad de nodos
+            print ("nodos etiquetados:",nodos)
+            setattr(grafo,'vertices',len(nodos))
+            print ("cantidad de vertices del grafo:",getattr(grafo,'vertices'))
+            return render_template("grafo.html", nodes = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data)
     return render_template("tarea1.html", grafo = grafo)
-
 
 @app.route('/graph/<int:nodes><string:nombre><string:tipo>')
 def graph(nodes,tipo,nombre):
