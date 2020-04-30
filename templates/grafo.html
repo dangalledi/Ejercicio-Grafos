@@ -3,8 +3,8 @@
 <body>
     <div class="jumbotron">
         <h1 class="display-5">Grafo</h1>
-        <p class="lead">Se generó un grafo de nombre {{nombre}} del tipo {{tipo}} de {{ nodes }} nodos.</p>
-        <img src="{{ url_for('graph', nombre=nombre, tipo=tipo, nodes=nodes) }}" alt="Un grafo de tipo {{tipo}} de {{ nodes }} nodos" height="300" class = "center"/>
+        <p class="lead">Se generó un grafo de nombre '{{ name }}' del tipo {{ type }} de {{ nodes }} nodo(s).</p>
+        <img src="{{ url_for('graph', name=name, types=types, nodes=nodes, edges=edges) }}" alt="Un grafo de tipo {{tipo}} de {{ nodes }} nodos" height="500" class="center" />
     </div>
 </body>
 

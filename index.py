@@ -1,19 +1,16 @@
 from flask import Flask, render_template, request, url_for, redirect, send_file
-from forms import IngresoGrafo
+from forms import ClaseGrafo
 from config import Config
-from tareas.tarea1 import ingresa_grafo
+from tareas.tarea1 import ingresa_grafo , muestra_datos
 
 #Librerias para los grafos
 import matplotlib
-matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from io import BytesIO
 import networkx as nx
 
 app = Flask(__name__)
 app.config.from_object(Config)
-
-grafos=[]
 
 # Ruta home 
 @app.route('/')   
@@ -23,29 +20,36 @@ def home():
 # Ruta tarea 1 
 @app.route('/tarea1', methods = ['GET', 'POST'])      
 def tarea1():
-    grafo = IngresoGrafo(request.form)      # se guardan los datos obtenidos del formulario  
+    grafo = ClaseGrafo(request.form)      # se guardan los datos obtenidos del formulario  
     if request.method == 'POST':
-        print (grafo.vertices.data)
-        print (grafo.aristas.data)
-        print (grafo.tipo.data)
-        print (grafo.etiquetado.data)
-        grafos=[grafo.vertices.data,grafo.aristas.data]
-        print (grafos)
-        print(grafo.nombre.data)
-        return render_template("grafo.html", nodes=grafo.vertices.data,tipo=grafo.tipo.data,nombre=grafo.nombre.data)
+        #Estos son todos los datos que me da el formulario
+
+        print("nombre del grafo:",grafo.nombre.data)
+        print ("tipo de grafo:",grafo.tipo.data)
+        print ("vertices:",grafo.vertices.data)
+        print ("aristas:",grafo.aristas.data)
+        
+        return render_template("grafo.html", name = grafo.nombre.data, types = grafo.tipo.data, nodes = grafo.vertices.data, edges = grafo.aristas.data)
 
     return render_template("tarea1.html", grafo = grafo)
 
 
-@app.route('/graph/<int:nodes><string:nombre><string:tipo>')
-def graph(nodes,tipo,nombre):
-    G = nx.complete_graph(nodes)
-    nx.draw(G)
+@app.route('/graph/<string:name>/<string:types>/<string:nodes>/<string:edges>')
+def graph(name,types,nodes,edges):
 
-    img = BytesIO() # file-like object for the image
-    plt.savefig(img) # save the image to the stream
-    img.seek(0) # writing moved the cursor to the end of the file, reset
-    plt.clf() # clear pyplot
+    if types == 'simple':  #Se crea Grafo
+        G = nx.Graph()  # como grafo simple 
+    else:
+        G = nx.DiGraph()   #como digrafo
+
+    G = ingresa_grafo(nodes,edges,G)     # se agregan los datos al grafo
+    muestra_datos(G)    # Muestra los datos por consola
+    nx.draw_networkx(G)     # Dibuja el grafo 
+    img = BytesIO()     # guardando el objeto como imagen
+    plt.savefig(img)    # guarda la imagen en la secuencia
+    img.seek(0)     # la escritura movió el cursor al final del archivo, reset
+    plt.clf()   # se limpia pyplot
+    G.clear()   # Se limpia el grafo
 
     return send_file(img, mimetype = 'image/png')
 
