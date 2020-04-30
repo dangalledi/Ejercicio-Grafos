@@ -1,11 +1,26 @@
 <!DOCTYPE html> {% extends "layout.html" %} {% block content %}
 
 <body>
-    <div class="jumbotron" class="center">
+    <div class="jumbotron">
         <h1 class="display-5">Grafo</h1>
         <p class="lead">Se generó un grafo de nombre '{{ name }}' del tipo {{ type }} de {{ nodes }} nodo(s).</p>
-        <img src="{{ url_for('graph', name=name, type=type, nodes=nodes, labels=labels, labeled=labeled) }}" alt="Un grafo de tipo {{ type }} de {{ nodes }} nodos" height="500" class = "center"/>
+        <img src="{{ url_for('grafica', name=name, type=type, nodes=nodes, labels=labels, labeled=labeled) }}" alt="Un grafo de tipo {{ type }} de {{ nodes }} nodos" height="500" class = "center"/>
+        <br>
+        <form  method = "POST" class = "center">
+
+                {{ form.csrf_token }}
+                
+                {{ form.origen }}
+                
+                {{ form.destino }} 
+                
+                {{ form.peso.label }}  {{ form.peso(size=11) }} {% for error in form.peso.errors %}
+                <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                <!--<input type = 'submit'> -->
+                {{ form.submit() }}
+                
+            
+        </form>
     </div>
 </body>
-
 {% endblock %}
