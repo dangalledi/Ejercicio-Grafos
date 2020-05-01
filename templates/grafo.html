@@ -3,23 +3,35 @@
 <body>
     <div class="jumbotron">
         <h1 class="display-5">Grafo</h1>
-        <p class="lead">Se generó un grafo de nombre '{{ name }}' del tipo {{ type }} de {{ nodes }} nodo(s).</p>
-        <img src="{{ url_for('grafica', name=name, type=type, nodes=nodes, labels=labels, labeled=labeled) }}" alt="Un grafo de tipo {{ type }} de {{ nodes }} nodos" height="500" class = "center"/>
+        <p class="lead">Se generó un grafo de nombre '{{ nombre }}' del tipo {{ tipo }} de {{ nodos }} nodo(s).</p>
+        <img src="{{ url_for('grafica', nombre = nombre, tipo=tipo, nodos = nodos, etiquetas = etiquetas, etiquetado = etiquetado)}}" alt="Un grafo de tipo {{ tipo }} de {{ nodos }} nodos" height="500" class = "center"/>
         <br>
-        <form  method = "POST" class = "center">
-
-                {{ form.csrf_token }}
-                
-                {{ form.origen }}
-                
-                {{ form.destino }} 
-                
-                {{ form.peso.label }}  {{ form.peso(size=11) }} {% for error in form.peso.errors %}
+        <form  method = "POST" class = 'center'>
+            <p>
+                <label for ='tipo'>Tipo de grafo: </label>
+                <select id = 'tipo' name = 'tipo' id="tipo">
+                    <option value = "simple">Simple</option>
+                    <option value = "direccionado">Direccionado</option>
+                </select>
+            </p>
+            <p>
+                Nombre: {{ grafo.nombre(size=32) }} {% for error in grafo.nombre.errors %}
                 <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                <!--<input type = 'submit'> -->
-                {{ form.submit() }}
+            </p>
+                Vertices: {{ grafo.nodos(size=64) }} {% for error in grafo.nodos.errors %}
+                <span style="color: red;">[{{ error }}]</span> {% endfor %}
+            </p>
+            <p>
+                {{ grafo.origen.label }} {{ grafo.origen }}
                 
-            
+
+                {{ grafo.destino.label }} {{ grafo.destino }} 
+                
+                {{ grafo.peso.label }}  {{ grafo.peso(size=11) }} {% for error in grafo.peso.errors %}
+                <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                
+                {{ grafo.submit() }}
+            </p>  
         </form>
     </div>
 </body>
