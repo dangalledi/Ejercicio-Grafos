@@ -7,14 +7,10 @@
         <p class="lead">Ingresa los datos solicitados para dibujar el grafo</p>
         <p>Seleccione el tipo de grafo</p>
         <p>
-            <select name='tipo' id="tipo">  <!--necesario crear el dato tipo en el formulario-->
+            <select name='tipo' id="tipo"> 
             <option value = "simple">Simple</option>
             <option value = "direccionado">Direccionado</option>
         </select>
-        </p>
-        <p>
-            {{ grafo.nombre.label }}<br> {{ grafo.nombre(size=32) }} {% for error in grafo.nombre.errors %}
-            <span style="color: red;">[{{ error }}]</span> {% endfor %}
         </p>
         <p>
             {{ grafo.vertices.label }}<br> {{ grafo.vertices(size=32) }} {% for error in grafo.vertices.errors %}
@@ -27,5 +23,14 @@
         </p>
         <p>{{ grafo.submit() }}</p>
     </form>
+    {% if message %}
+    <div class="alert alert-danger" role="alert">
+        <p>Nota: {{ message }}</p>
+        <hr>
+        <p class="mb-1"> Ejemplo de ingreso de variables</p>
+        <p class="mb-0"> Vertices: 1,2,3,4,5 </p>
+        <p class="mb-0"> Aristas: (1,2),(3,4),(2,4),(3,5),(3,1) </p>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}
