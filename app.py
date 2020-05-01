@@ -34,8 +34,6 @@ def tarea1():
             grafo.destino.choices = [(str(i),str(i)) for i in range(int(grafo.nodos.data))] # se ingresan las opciones dinámicas al atributo destino
             setattr(grafo,'vertices',int(grafo.nodos.data))  # como la data es string se tiene que convertir a entero y obtener la cantidad de nodos/vertices 
             print ("cantidad de vertices del grafo:",getattr(grafo,'vertices')) # print de consola
-            return render_template("grafo.html", grafo = grafo, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data)
-            # se retorna a la misma función el template grafo.html con la función render_template() que sobrepone el html sobre tarea1.html sin cambiar la ruta (Flask)
         else:
             # ¡¡¡AÑADIR CONDICIÓN VALIDACIÓN DE NOMBRES DIFERENTES!!!
             etiquetas = grafo.nodos.data.split(',') # de no ser dígitos lo toma como etiquetas y cantidad de nodos
@@ -45,7 +43,9 @@ def tarea1():
             print ("nodos etiquetados:",etiquetas) # print de consola
             setattr(grafo,'vertices',len(etiquetas)) # se le asigna al atributo vertices del grafo el largo de la lista
             print ("cantidad de vertices del grafo:",getattr(grafo,'vertices')) # print de consola
-            return render_template("grafo.html", grafo = grafo, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data)
+            #return render_template("grafo.html", grafo = grafo, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data)
+        return render_template("grafo.html", grafo = grafo, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data)
+        # se retorna a la misma función el template grafo.html con la función render_template() que sobrepone el html sobre tarea1.html sin cambiar la ruta (Flask)
     return render_template("tarea1.html", grafo = grafo)
 
 @app.route('/graph/<int:nodos>/<string:tipo>/<string:nombre>/<string:etiquetas>/<int:etiquetado>') # se usa una ruta que contiene los datos del grafo para que Flask los compile
