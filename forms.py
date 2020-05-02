@@ -9,8 +9,13 @@ class ClaseGrafo(FlaskForm):
     tipo = SelectField(u'tipo',choices = [('simple','Simple'),('direccionado','Direccionado')])
     nodos = StringField('Vertices\n(Ej: Talca, Paris, Londres) de <b>NO</b> ser etiquetado... <b>ingresar simplemente el n° de nodos</b>',validators=[DataRequired()])
     vertices = 0
-    submit = SubmitField('Ingresar')
-    origen = SelectField("origen", choices = [ ])
-    destino = SelectField("destino", choices = [ ])
+    aristas = []
+    # IMPLEMENTAR ATRIBUTO MATRIZ
+    submit = SubmitField('      Crear       ')
+    
+class PostForm(FlaskForm):
+    origen = SelectField("Origen: ", choices = [ ]) #
+    destino = SelectField("Destino: ",choices = [ ]) #
+    tarea = SelectField("Tarea: ", choices = [("agregar","Agregar nodo al Grafo"),("corto","Mostrar camino más corto"),("flujo","Indicar el flujo máximo")])
     peso = StringField("Peso: ",validators = [DataRequired()])
-    #aristas = []
+    submit = SubmitField('      Realizar        ')
