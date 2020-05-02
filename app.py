@@ -21,17 +21,17 @@ def home():
 @app.route('/tarea1', methods = ['GET', 'POST'])      
 def tarea1():
     grafo = ClaseGrafo()            # cada vez que ingresa a la función de la ruta se crea el objeto grafo con los inputs
-    form = PostForm()           # 2do form para trabajar el grafo 
+    form = PostForm()           # 2do form realizar tareas con el grafo
     if request.method == 'POST':            # if de request ya hecho
-        if form.origen.data[0].isdigit() == True and form.destino.data[0].isdigit() == True and (int(form.origen.data[0]),int(form.destino.data[0]),float(form.peso.data)) not in getattr(grafo,'aristas') and form.tarea.data == 'agregar':
-            grafo.aristas.append((int(form.origen.data[0]),int(form.destino.data[0]),float(form.peso.data)))            # si el primer caracter del string es dígito lo agrega como vector a aristas
+        if ((form.origen.data,form.destino.data,form.peso.data)) not in getattr(grafo,'aristas') and form.tarea.data == 'agregar':
+            grafo.aristas.append((int(form.origen.data),int(form.destino.data),float(form.peso.data)))            # si el primer caracter del string es dígito lo agrega como vector a aristas
             # al estar vacío el atributo aristas, la 1era vez toma la N de None y no se pueden repetir 
         
         elif form.tarea.data == 'corto':
             print("¡¡¡   IMPLEMENTAR ALGORITMO DE DJISKTRA   !!!")            # ¡¡¡IMPLEMENTAR ALGORITMO DE DJISKTRA!!!
         
         elif form.tarea.data == 'flujo':
-            print("¡¡¡   IMPLEMENTAR FLUJO MÁXIMO   !!!")         #"¡¡¡IMPLEMENTAR FLUJO MÁXIMO!!!"
+            print("¡¡¡   IMPLEMENTAR FLUJO MÁXIMO   !!!")         #¡¡¡IMPLEMENTAR FLUJO MÁXIMO!!!
 
         else:
             setattr(grafo,'aristas',[])
@@ -46,8 +46,8 @@ def tarea1():
         grafo.nombre.data = grafo.nombre.data.replace(' ','')
         if  (grafo.nodos.data).isdigit() == True:           # if de si el ingreso son solo números implicitamente se deduce grafo no etiquetado
             grafo.etiquetado.data = False           # atributo booleano etiquetado del grafo se hace falso
-            form.origen.choices = [(str(i),str(i)) for i in range(int(grafo.nodos.data))]          # se ingresan las opciones dinámicas al atributo origen
-            form.destino.choices = [(str(i),str(i)) for i in range(int(grafo.nodos.data))]         # se ingresan las opciones dinámicas al atributo destino
+            form.origen.choices = [(i,str(i)) for i in range(int(grafo.nodos.data))]          # se ingresan las opciones dinámicas al atributo origen
+            form.destino.choices = [(i,str(i)) for i in range(int(grafo.nodos.data))]         # se ingresan las opciones dinámicas al atributo destino
             setattr(grafo,'vertices',int(grafo.nodos.data))         # como la data es string se tiene que convertir a entero y obtener la cantidad de nodos/vertices 
             
             print("cantidad de vertices del grafo:",getattr(grafo,'vertices'))          # print de consola
@@ -56,8 +56,8 @@ def tarea1():
             grafo.nodos.data = grafo.nodos.data.replace(' ','')
             etiquetas = grafo.nodos.data.split(',')         # de no ser dígitos lo toma como etiquetas y cantidad de nodos
             grafo.etiquetado.data = True            # if de si el ingreso es una lista implicitamente se deduce grafo etiquetado
-            form.origen.choices = [(str(i)+": "+etiquetas[i],str(i)+": "+etiquetas[i]) for i in range(len(etiquetas))]         # la otra manera si es un nodo etiquetado
-            form.destino.choices = [(str(i)+": "+etiquetas[i],str(i)+": "+etiquetas[i]) for i in range(len(etiquetas))]        # la otra manera si es un nodo etiquetado
+            form.origen.choices = [(i,str(i)+": "+etiquetas[i]) for i in range(len(etiquetas))]         # la otra manera si es un nodo etiquetado
+            form.destino.choices = [(i,str(i)+": "+etiquetas[i]) for i in range(len(etiquetas))]        # la otra manera si es un nodo etiquetado
             setattr(grafo,'vertices',len(etiquetas))            # se le asigna al atributo vertices del grafo el largo de la lista
             
             print("nodos etiquetados:",etiquetas)           # print de consola
@@ -77,12 +77,12 @@ def grafica(nodos,tipo,nombre,etiquetas,etiquetado,aristas):
     if etiquetado == True:
         labels = etiquetas.split(',')
         dic_etiquetas = { i : labels[i] for i in range(len(labels))}
-        print(dic_etiquetas.items())            # print de consola
+        print("-------------------------------------------------------",dic_etiquetas.items())            # print de consola
         G.add_nodes_from(labels) 
     else:
         for i in range(nodos):
             G.add_node(i)
-    print(G.nodes())            # print de consola
+    #print(G.nodes())            # print de consola
     nx.draw(G,with_labels=True)
     img = BytesIO()         # se le asigna memoria a la imagen
     plt.savefig(img)            # se guarda la imagen del stream al objeto plt que creará la imagen
