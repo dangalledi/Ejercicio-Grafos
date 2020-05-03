@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, url_for, redirect, send_file
-from forms import ClaseGrafo, PostForm
+from forms import ClaseGrafo, PostForm, fix
 from config import Config
 
 #Librerias para los grafos
@@ -35,6 +35,7 @@ def tarea1():
             print("¡¡¡   IMPLEMENTAR FLUJO MÁXIMO   !!!")         #¡¡¡IMPLEMENTAR FLUJO MÁXIMO!!!
 
         else:
+            setattr(grafo,'vectores',[])
             setattr(grafo,'aristas',[])
             setattr(grafo,'vertices',0)
 
@@ -71,6 +72,7 @@ def tarea1():
 
 @app.route('/graph/<int:nodos>/<string:tipo>/<string:nombre>/<string:etiquetas>/<int:etiquetado>/<string:vectores>') # se usa una ruta que contiene los datos del grafo para que Flask los compile
 def grafica(nodos,tipo,nombre,etiquetas,etiquetado,vectores):
+
     if tipo == 'simple':            # si el atributo tipo es la constante 'simple' se crea el objeto grafo G sin direcciones
         G = nx.Graph()
     else:
@@ -80,10 +82,18 @@ def grafica(nodos,tipo,nombre,etiquetas,etiquetado,vectores):
         dic_etiquetas = { i : labels[i] for i in range(len(labels))}
         print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",dic_etiquetas.items())            # print de consola
         G.add_nodes_from(labels)
-        #G.add_edges_from()
     else:
         for i in range(nodos):
             G.add_node(i)
+
+
+
+    if vectores != "[]":
+        j = fix(vectores,dic_etiquetas)
+        G.add_edges_from(j)
+
+
+
     #print(G.nodes())            # print de consola
     nx.draw(G,with_labels=True)
     img = BytesIO()         # se le asigna memoria a la imagen
