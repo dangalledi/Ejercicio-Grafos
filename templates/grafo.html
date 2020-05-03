@@ -4,9 +4,9 @@
     <div class="jumbotron">
         <h1 class="display-5">Grafo</h1>
         <p class="lead">Se generó un grafo de nombre "{{ nombre }}" del tipo {{ tipo }} de {{ nodos }} nodo(s).</p> 
-        <img src="{{ url_for('grafica', nombre = nombre, tipo = tipo, nodos = nodos, etiquetas = etiquetas, etiquetado = etiquetado, aristas = aristas)}}" alt="Un grafo de tipo {{ tipo }} de {{ nodos }} nodos" height="500" class = "center"/>
+        <img src="{{ url_for('grafica', nombre = nombre, tipo = tipo, nodos = nodos, etiquetas = etiquetas, etiquetado = etiquetado, vectores = vectores)}}" alt="Un grafo de tipo {{ tipo }} de {{ nodos }} nodos" height="500" class = "center"/>
         <br>
-        <p>Su expresión matemática es la siguiente: {{ nombre }} = ( { {{ etiquetas }} }, {{ aristas }} )</p>
+        <p>Su expresión matemática es la siguiente: {{ nombre }} = ( { {{ etiquetas }} }, { {{ vectores }} })</p>
         <br>
         <div>
             <form  method = "POST">

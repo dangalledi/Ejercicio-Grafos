@@ -23,9 +23,10 @@ def tarea1():
     grafo = ClaseGrafo()            # cada vez que ingresa a la función de la ruta se crea el objeto grafo con los inputs
     form = PostForm()           # 2do form realizar tareas con el grafo
     if request.method == 'POST':            # if de request ya hecho
-        if ((form.origen.data,form.destino.data,form.peso.data)) not in getattr(grafo,'aristas') and form.tarea.data == 'agregar':
+        if  form.tarea.data == 'agregar' and form.destino.data[0].isdigit() == True and ((int(form.origen.data),int(form.destino.data),float(form.peso.data))) not in getattr(grafo,'aristas'):
+            grafo.vectores.append((int(form.origen.data),int(form.destino.data)))
             grafo.aristas.append((int(form.origen.data),int(form.destino.data),float(form.peso.data)))            # si el primer caracter del string es dígito lo agrega como vector a aristas
-            # al estar vacío el atributo aristas, la 1era vez toma la N de None y no se pueden repetir 
+            # al estar vacío el atributo aristas, la 1era vez toma la N de None y no se pueden repetir
         
         elif form.tarea.data == 'corto':
             print("¡¡¡   IMPLEMENTAR ALGORITMO DE DJISKTRA   !!!")            # ¡¡¡IMPLEMENTAR ALGORITMO DE DJISKTRA!!!
@@ -41,7 +42,7 @@ def tarea1():
         print("eitquetado:",grafo.etiquetado.data)          # print de consola
         print("tipo de grafo:",grafo.tipo.data)         # print de consola
         print("nodos seleccionados para tarea (n°: origen, destino): ("+form.origen.data+", "+form.destino.data+")")         # print de consola
-        print("Aristas del grafo: ",getattr(grafo,"aristas"))
+        print("vectores $$$$$$$$$$$$$$$$$$$ = : ",getattr(grafo,"vectores"))
         
         grafo.nombre.data = grafo.nombre.data.replace(' ','')
         if  (grafo.nodos.data).isdigit() == True:           # if de si el ingreso son solo números implicitamente se deduce grafo no etiquetado
@@ -63,13 +64,13 @@ def tarea1():
             print("nodos etiquetados:",etiquetas)           # print de consola
             print("cantidad de vertices del grafo:",getattr(grafo,'vertices'))          # print de consola
         
-        return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, aristas = getattr(grafo,'aristas'))
+        return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'))
         # se retorna a la misma función el template grafo.html con la función render_template() que sobrepone el html sobre tarea1.html sin cambiar la ruta (Flask)
     
     return render_template("tarea1.html", grafo = grafo)
 
-@app.route('/graph/<int:nodos>/<string:tipo>/<string:nombre>/<string:etiquetas>/<int:etiquetado>/<string:aristas>') # se usa una ruta que contiene los datos del grafo para que Flask los compile
-def grafica(nodos,tipo,nombre,etiquetas,etiquetado,aristas):
+@app.route('/graph/<int:nodos>/<string:tipo>/<string:nombre>/<string:etiquetas>/<int:etiquetado>/<string:vectores>') # se usa una ruta que contiene los datos del grafo para que Flask los compile
+def grafica(nodos,tipo,nombre,etiquetas,etiquetado,vectores):
     if tipo == 'simple':            # si el atributo tipo es la constante 'simple' se crea el objeto grafo G sin direcciones
         G = nx.Graph()
     else:
@@ -77,8 +78,9 @@ def grafica(nodos,tipo,nombre,etiquetas,etiquetado,aristas):
     if etiquetado == True:
         labels = etiquetas.split(',')
         dic_etiquetas = { i : labels[i] for i in range(len(labels))}
-        print("-------------------------------------------------------",dic_etiquetas.items())            # print de consola
-        G.add_nodes_from(labels) 
+        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",dic_etiquetas.items())            # print de consola
+        G.add_nodes_from(labels)
+        #G.add_edges_from()
     else:
         for i in range(nodos):
             G.add_node(i)

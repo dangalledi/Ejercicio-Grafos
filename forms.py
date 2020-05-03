@@ -10,6 +10,7 @@ class ClaseGrafo(FlaskForm):
     nodos = StringField('Vertices\n(Ej: Talca, Paris, Londres) de <b>NO</b> ser etiquetado... <b>ingresar simplemente el n° de nodos</b>',validators=[DataRequired()])
     vertices = 0
     aristas = []
+    vectores = []
     # IMPLEMENTAR ATRIBUTO MATRIZ
     submit = SubmitField('      Crear       ')
     
