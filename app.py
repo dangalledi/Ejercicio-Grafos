@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, url_for, redirect, send_file
-from forms import ClaseGrafo, PostForm, fix
+from forms import ClaseGrafo, PostForm
 from config import Config
+from nwfixes import fix, fix2
 
 #Librerias para los grafos
 import matplotlib
@@ -34,9 +35,9 @@ def tarea1():
         elif form.tarea.data == 'flujo':
             print("¡¡¡   IMPLEMENTAR FLUJO MÁXIMO   !!!")         #¡¡¡IMPLEMENTAR FLUJO MÁXIMO!!!
 
-        else:
-            setattr(grafo,'vectores',[])
-            setattr(grafo,'aristas',[])
+        elif form.tarea.data == 'actualizar':
+            grafo.vectores.clear()
+            grafo.aristas.clear()
             setattr(grafo,'vertices',0)
 
         print("nombre del grafo:",grafo.nombre.data)            # print de consola ¡¡¡ AÑADIR CONDICIÓN DE NOMBRE NO NUMÉRICO !!!
@@ -87,11 +88,13 @@ def grafica(nodos,tipo,nombre,etiquetas,etiquetado,vectores):
             G.add_node(i)
 
 
-
     if vectores != "[]":
         j = fix(vectores,dic_etiquetas)
         G.add_edges_from(j)
 
+    if vectores != "[]" and etiquetado==False:
+        j = fix2(vectores)
+        G.add_edges_from(j)
 
 
     #print(G.nodes())            # print de consola
