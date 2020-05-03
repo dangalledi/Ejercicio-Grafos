@@ -52,45 +52,25 @@ def tarea1():
             if (es_euleriano_interrogacion_xD( aristas ) == True ):  
                  encontrar_camino_euleriano( aristas )  ## Retorna una lista
                  print ('Camino euleriano: ',encontrar_camino_euleriano( aristas ) )
-                 
-        elif form.tarea.data == 'arbol': 
-
-            AristasNuevas = getattr(grafo,'vertices') 
-            Vertices = []
-            for i in range (AristasNuevas):
-                Vertices.append(i)
-
-            graph={
-            'vertices': [0,1,2,3]
-            ,
-            'Aristas': set(getattr(grafo,'aristas') )
-            }    
-            
-            k=kruskal(graph)
-            print ("El resultado de la MTS:",k)
 
         elif (form.tarea.data == 'conexo' and getattr(grafo,'vertices') != 0):
             N=getattr(grafo,'vertices')
             G=getattr(grafo,'aristas') #Aristas tipo (int,int,float)
             Matriz(G, N)         #Implementacion conexo
 
+        elif form.tarea.data == 'kruskal': 
             #Si lo que entra es una lista de etiquetas
             if(grafo.nodos.data).isdigit() == True:
-                
                 #AristasNuevas = getattr(grafo,'vertices')
                 Vertices = []
                 for i in range (int(grafo.nodos.data)):
                     Vertices.append(i)
-
                 graph={
                 'vertices': Vertices
                 ,
                 'Aristas': set(getattr(grafo,'aristas') )
                 }    
-                
                 k=kruskal(graph)
-                
-
                 print ("El resultado de la MTS:",k)
 
         #Si lo que entra es el numero de vertices
@@ -99,15 +79,12 @@ def tarea1():
                 Vertices = []
                 for i in range (len(AristasNuevas)):
                     Vertices.append(i)
-
                 graph={
                 'vertices': Vertices
                 ,
                 'Aristas': set(getattr(grafo,'aristas') )
                 }    
-                
                 k=kruskal(graph)
-                
                 print ("El resultado de la MTS:",k)
 
         elif form.tarea.data == 'actualizar':

@@ -117,12 +117,11 @@ def encontrar_camino_hamiltoniano(aristas):
     return caminito
 
 #Implementacion de Kruskal
-
 #Variables para Kruskal 
 base = dict()
 ord = dict()   
 
-    # Función para generar conuntos
+# Función para generar conjuntos
 def generar_conjuntos(v):
     base[v] = v
     ord[v] = 0
@@ -199,16 +198,16 @@ def Conexo(s,M,n):
     cola = Queue()
     cola.put(s)
     visitado[s]=1
-    while not cola.empty():
+    while not cola.empty(): #Recorre la Cola
         s = cola.get()
         for i in range(n):
-            if(visitado[i]==0):
-                if (M[s][i]==1):
-                    cola.put(i)
-                    visitado[i] = 1
+            if(visitado[i]==0):#Pregunta si el nodo no es visitado
+                if (M[s][i]==1):#Pregunta si hay una conexion entre los nodos [s][i]
+                    cola.put(i) #Se agega el nodo encontrado a la cola 
+                    visitado[i] = 1 #Se marca como visitado
     total=0
     for j in range(len(visitado)):
-        total = total + visitado[j]
+        total = total + visitado[j] #Si el total de visitados es igual a los nodos entonces es conexo
     if total == n: 
         print("El grafo es conexo")
     else: 
