@@ -5,7 +5,7 @@ from nwfixes import fix, fix2
 
 from networkx.classes import graph #???????
 from networkx.algorithms.tree import mst #???????
-from tarea1 import kruskal, Matriz, encontrar_camino_euleriano ,encontrar_camino_hamiltoniano ,es_euleriano_interrogacion_xD
+from tarea1 import kruskal, Matriz, encontrar_camino_euleriano ,encontrar_camino_hamiltoniano ,es_euleriano_interrogacion_xD, cant_nodos
 from dijkstra import dijkstra
 
 #Librerias para los grafos
@@ -53,9 +53,10 @@ def tarea1():
                  encontrar_camino_euleriano( aristas )  ## Retorna una lista
                  print ('Camino euleriano: ',encontrar_camino_euleriano( aristas ) )
 
-        elif (form.tarea.data == 'conexo' and getattr(grafo,'vertices') != 0):
-            N=getattr(grafo,'vertices')
+        elif (form.tarea.data == 'conexo'): # and getattr(grafo,'vertices') != 0
             G=getattr(grafo,'aristas') #Aristas tipo (int,int,float)
+            N=cant_nodos(G)+1
+            print("N =", N)
             Matriz(G, N)         #Implementacion conexo
 
         elif form.tarea.data == 'kruskal': 

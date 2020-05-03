@@ -222,3 +222,11 @@ def Matriz(grafo,n):
         ma[b-1][a-1]=1
     print(ma)
     Conexo(0,ma,n)
+
+def cant_nodos(g):
+    mayor=0
+    for i in range(len(g)):
+        for j in range(2):
+            if(g[i][j] > mayor):
+                mayor = g[i][j]
+    return mayor
