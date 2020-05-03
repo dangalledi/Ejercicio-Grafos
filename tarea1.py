@@ -1,23 +1,18 @@
-#Matriz de Camino --> Simple 
 from operator import itemgetter
+from queue import Queue #Libreria para colas
+import numpy as np
+
+def traductor (aristas):  #[(int,int,float),(int,int,float),...,(int,int,float)]
+
+    aristas = np.array(aristas)
+    if (aristas.ndim == 3):
+        nodos = np.delete(aristas, 2, axis=1)   # [(int,int),(int,int),(int,int), ... ,(int,int)]
+    else :
+        return aristas   
+                  
+    return nodos
 
 def matriz_de_adyacencia(nodos,aristas):
-    MatrizCaminos = []
-    for i in range(len(nodos)):
-        MatrizCaminos.append([])
-        for j in range(len(nodos)):
-            MatrizCaminos[i].append(0)
-
-    for c in aristas:
-        for a in range(len(nodos)):
-            for b in range(len(nodos)):
-                if ((b+1 == int(c[0]) and a+1 ==int(c[1])) or (b+1 == int(c[1]) and a+1 == int(c[0]))):
-                    MatrizCaminos[a][b]=MatrizCaminos[a][b]+1
-
-    return MatrizCaminos
-
-#Matriz de Camino --> Direccionada 
-def matriz_de_adyacencia_direccionada(nodos,aristas):
     MatrizCaminos = []
     for i in range(len(nodos)):
         MatrizCaminos.append([])
@@ -31,7 +26,6 @@ def matriz_de_adyacencia_direccionada(nodos,aristas):
                     MatrizCaminos[a][b]=MatrizCaminos[a][b]+1
 
     return MatrizCaminos
-
 
 def encontrar_camino_euleriano(aristas):
     camino = []
@@ -57,7 +51,7 @@ def encontrar_camino_euleriano(aristas):
             
     return camino
 
-def lista_de_grados_de_nodos(matriz):
+def lista_de_grados_de_nodos(matriz,nodos):
 
     listaGrados = []
     for a in range(len(nodos)):                         
@@ -69,6 +63,7 @@ def lista_de_grados_de_nodos(matriz):
     return listaGrados
 
 def encontrar_camino_hamiltoniano(aristas,nodos):
+    aristas = traductor(aristas)
     camino = []
     caminito =[]
     arista=[]
@@ -99,7 +94,7 @@ def encontrar_camino_hamiltoniano(aristas,nodos):
     else:
         print ('Es hamiltoniano')
         return camino
-
+        
     return caminito
 
 #Implementacion de Kruskal
@@ -132,6 +127,29 @@ def union(u, v):
             if ord[v1] == ord[v2]: 
                 ord[v2] += 1
     
+
+def es_euleriano_interrogacion_xD (nodos,aristas):
+    aristas = traductor(aristas)
+    auxiliar= 0
+    auxiliargrado = 0
+    Matriz_Adyacencia = matriz_de_adyacencia(nodos,aristas)   
+    for i in lista_de_grados_de_nodos(Matriz_Adyacencia,nodos):         
+        if (i%2==0):
+            auxiliar = auxiliar +1
+        else:
+            auxiliargrado = auxiliargrado + 1
+
+    if(auxiliar != (len(nodos)) or encontrar_camino_euleriano == False):
+        print('No es Euleriano')
+        return False
+    elif (auxiliargrado%2 == 0 and (auxiliar == (len(nodos))-auxiliargrado)):
+        print ('Es Euleriano')
+        return True
+    else:
+        print('Es Euleriano :)')
+        return True
+    return 0
+
     # Función principal del algoritmo Kruskal
 def kruskal(graph):
     mst = set() #convierte a mst en un conjunto vacío
@@ -154,3 +172,33 @@ def kruskal(graph):
             # Union(u,v)
             mst.add(e) #se adhieren al conjunto msd el elemento e=(u,v,peso) generado
     return mst 
+
+def Conexo(s,M,n):
+    visitado=np.zeros(n) #arreglo de ceros, cambia a 1 si es visitado
+    cola = Queue()
+    cola.put(s)
+    visitado[s]=1
+    while not cola.empty():
+        s = cola.get()
+        for i in range(n):
+            if(visitado[i]==0):
+                if (M[s][i]==1):
+                    cola.put(i)
+                    visitado[i] = 1
+    total=0
+    for j in range(len(visitado)):
+        total = total + visitado[j]
+    if total == n: 
+        print("El grafo es conexo")
+    else: 
+        print("El Grafo no es conexo")
+
+def Matriz(grafo,n):
+    ma = np.zeros((n,n))
+    for i in range(len(grafo)): 
+        a=grafo[i][0]
+        b=grafo[i][1]
+        ma[a-1][b-1]=1
+        ma[b-1][a-1]=1
+    print(ma)
+    Conexo(0,ma,n)

@@ -2,9 +2,11 @@ from flask import Flask, render_template, request, url_for, redirect, send_file
 from forms import ClaseGrafo, PostForm
 from config import Config
 from nwfixes import fix, fix2
-from networkx.classes import graph
-from networkx.algorithms.tree import mst
-from tarea1 import kruskal
+
+from networkx.classes import graph #???????
+from networkx.algorithms.tree import mst #???????
+from tarea1 import kruskal, Matriz, encontrar_camino_euleriano ,encontrar_camino_hamiltoniano ,es_euleriano_interrogacion_xD
+from dijkstra import dijkstra
 
 #Librerias para los grafos
 import matplotlib
@@ -38,7 +40,34 @@ def tarea1():
         elif form.tarea.data == 'flujo':
             print("¡¡¡   IMPLEMENTAR FLUJO MÁXIMO   !!!")         #¡¡¡IMPLEMENTAR FLUJO MÁXIMO!!!
 
-        elif form.tarea.data == 'kruskal': 
+        elif form.tarea.data == 'hamiltoniano':
+            if (encontrar_camino_hamiltoniano( grafo.aristas.data ) != False):
+                encontrar_camino_hamiltoniano( grafo.aristas.data )  ## Retorna una lista 
+
+        elif form.tarea.data == 'euleriano':
+            if (es_euleriano_interrogacion_xD( grafo.vertices.data,grafo.aristas.data )==True ):  
+                 encontrar_camino_euleriano( grafo.aristas.data )  ## Retorna una lista  
+
+        elif form.tarea.data == 'arbol': 
+
+            AristasNuevas = getattr(grafo,'vertices') 
+            Vertices = []
+            for i in range (AristasNuevas):
+                Vertices.append(i)
+
+            graph={
+            'vertices': [0,1,2,3]
+            ,
+            'Aristas': set(getattr(grafo,'aristas') )
+            }    
+            
+            k=kruskal(graph)
+            print ("El resultado de la MTS:",k)
+
+        elif (form.tarea.data == 'conexo' and getattr(grafo,'vertices') != 0):
+            N=getattr(grafo,'vertices')
+            G=getattr(grafo,'aristas') #Aristas tipo (int,int,float)
+            Matriz(G, N)         #Implementacion conexo
 
             #Si lo que entra es una lista de etiquetas
             if(grafo.nodos.data).isdigit() == True:
@@ -76,8 +105,6 @@ def tarea1():
                 
                 print ("El resultado de la MTS:",k)
 
-            
-
         elif form.tarea.data == 'actualizar':
             grafo.vectores.clear()
             grafo.aristas.clear()
@@ -110,7 +137,7 @@ def tarea1():
             form.origen.choices = [(i,str(i)+": "+etiquetas[i]) for i in range(len(etiquetas))]         # la otra manera si es un nodo etiquetado
             form.destino.choices = [(i,str(i)+": "+etiquetas[i]) for i in range(len(etiquetas))]        # la otra manera si es un nodo etiquetado
             setattr(grafo,'vertices',len(etiquetas))            # se le asigna al atributo vertices del grafo el largo de la lista
-            
+
             print("nodos etiquetados:",etiquetas)           # print de consola
             print("cantidad de vertices del grafo:",getattr(grafo,'vertices'))          # print de consola
         
@@ -134,7 +161,6 @@ def grafica(nodos,tipo,nombre,etiquetas,etiquetado,vectores):
     else:
         for i in range(nodos):
             G.add_node(i)
-
 
     if vectores != "[]":
         j = fix(vectores,dic_etiquetas)
