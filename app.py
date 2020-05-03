@@ -41,13 +41,18 @@ def tarea1():
             print("¡¡¡   IMPLEMENTAR FLUJO MÁXIMO   !!!")         #¡¡¡IMPLEMENTAR FLUJO MÁXIMO!!!
 
         elif form.tarea.data == 'hamiltoniano':
-            if (encontrar_camino_hamiltoniano( grafo.aristas.data ) != False):
-                encontrar_camino_hamiltoniano( grafo.aristas.data )  ## Retorna una lista 
+            aristas=getattr(grafo,'aristas') #Aristas tipo (int,int,float)
+            if (encontrar_camino_hamiltoniano( aristas) != False):
+                encontrar_camino_hamiltoniano( aristas )  ## Retorna una lista 
+                print ('Camino Hamiltoniano: ',encontrar_camino_hamiltoniano( aristas ) )
 
         elif form.tarea.data == 'euleriano':
-            if (es_euleriano_interrogacion_xD( grafo.vertices.data,grafo.aristas.data )==True ):  
-                 encontrar_camino_euleriano( grafo.aristas.data )  ## Retorna una lista  
-
+            aristas=getattr(grafo,'aristas')
+            aristas=getattr(grafo,'aristas') #Aristas tipo (int,int,float)
+            if (es_euleriano_interrogacion_xD( aristas ) == True ):  
+                 encontrar_camino_euleriano( aristas )  ## Retorna una lista
+                 print ('Camino euleriano: ',encontrar_camino_euleriano( aristas ) )
+                 
         elif form.tarea.data == 'arbol': 
 
             AristasNuevas = getattr(grafo,'vertices') 

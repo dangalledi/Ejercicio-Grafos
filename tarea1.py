@@ -12,17 +12,33 @@ def traductor (aristas):  #[(int,int,float),(int,int,float),...,(int,int,float)]
                   
     return nodos
 
-def matriz_de_adyacencia(nodos,aristas):
-    MatrizCaminos = []
-    for i in range(len(nodos)):
-        MatrizCaminos.append([])
-        for j in range(len(nodos)):
-            MatrizCaminos[i].append(0)
+def nodos_de_aristas (aristas):
+
+    nodos = []
+    for i in aristas:
+        for a in i: 
+            nodos.append(a)
+    nodos = np.array(nodos)        
+    nodos = set(nodos)
+
+    return nodos
+
+def matriz_de_adyacencia(aristas):
+
+    nodos = nodos_de_aristas(aristas)
+    print (nodos)
+    largo = 0
+    MatrizCaminos=[]
+
+    for i in nodos:
+        largo = largo +1
+    
+    MatrizCaminos= np.zeros((largo,largo))
 
     for c in aristas:
-        for a in range(len(nodos)):
-            for b in range(len(nodos)):
-                if ((a+1 == int(c[0]) and b+1 ==int(c[1]))):
+        for a in range(largo):
+            for b in range(largo):
+                if ((b+1 == int(c[0]) and a+1 ==int(c[1])) or (b+1 == int(c[1]) and a+1 == int(c[0]))):
                     MatrizCaminos[a][b]=MatrizCaminos[a][b]+1
 
     return MatrizCaminos
@@ -51,8 +67,9 @@ def encontrar_camino_euleriano(aristas):
             
     return camino
 
-def lista_de_grados_de_nodos(matriz,nodos):
+def lista_de_grados_de_nodos(matriz,aristas):
 
+    nodos = nodos_de_aristas(aristas)
     listaGrados = []
     for a in range(len(nodos)):                         
         aux = 0
@@ -62,7 +79,9 @@ def lista_de_grados_de_nodos(matriz,nodos):
 
     return listaGrados
 
-def encontrar_camino_hamiltoniano(aristas,nodos):
+def encontrar_camino_hamiltoniano(aristas):
+
+    nodos = nodos_de_aristas(aristas)
     aristas = traductor(aristas)
     camino = []
     caminito =[]
@@ -89,7 +108,7 @@ def encontrar_camino_hamiltoniano(aristas,nodos):
         for i in aristas:    
             if((i[0]== camino[int(len(camino)/2)] and i[1]== camino[int(len(camino)/2)-1]) or( i[0]== camino[int(len(camino)/2)-1] and i[1]== camino[int(len(camino)/2)])):
                 aristas.remove(i)
-                caminito =encontrar_camino_hamiltoniano(aristas,nodos)
+                caminito =encontrar_camino_hamiltoniano(aristas)
                 return caminito
     else:
         print ('Es hamiltoniano')
@@ -128,12 +147,14 @@ def union(u, v):
                 ord[v2] += 1
     
 
-def es_euleriano_interrogacion_xD (nodos,aristas):
+def es_euleriano_interrogacion_xD (aristas):
+
     aristas = traductor(aristas)
+    nodos = nodos_de_aristas(aristas)
     auxiliar= 0
     auxiliargrado = 0
-    Matriz_Adyacencia = matriz_de_adyacencia(nodos,aristas)   
-    for i in lista_de_grados_de_nodos(Matriz_Adyacencia,nodos):         
+    Matriz_Adyacencia = matriz_de_adyacencia(aristas)   
+    for i in lista_de_grados_de_nodos(Matriz_Adyacencia,aristas):         
         if (i%2==0):
             auxiliar = auxiliar +1
         else:
