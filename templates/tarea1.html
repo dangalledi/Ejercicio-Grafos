@@ -3,27 +3,23 @@
 <!-- dentro del container "jumbotron" agregado desde bootstrap, se encuentra el formulario para ingresar el grafo-->
 
 <div class="jumbotron">
-    <form action=" " method="post" novalidate>
+    <form action=" " method="POST" novalidate>
         <p class="lead">Ingresa los datos solicitados para dibujar el grafo</p>
         <p>Seleccione el tipo de grafo</p>
         <p>
-        <select name = 'tipo' id="tipo">  <!--necesario crear el dato tipo en el formulario-->
+        <select name = 'tipo' id = 'tipo'>  <!--necesario crear el dato tipo en el formulario-->
             <option value = "simple">Simple</option>
             <option value = "direccionado">Direccionado</option>
         </select>
-        <input type = 'checkbox' name = 'etiquetado' value = 'true'> Etiquetado <!--checkbox pa saber si se etiqueta o no-->
+        <!--<input type = 'checkbox' name = 'etiquetado' value = 'true'> Etiquetado checkbox pa saber si se etiqueta o no-->
         </p>
         <p>
-            {{ grafo.nombre.label }}<br> {{ grafo.nombre(size=32) }} {% for error in grafo.nombre.errors %}
+            {{ grafo.nombre.label }}<br> {{ grafo.nombre(size=32, value="Last Train To London") }} {% for error in grafo.nombre.errors %}
             <span style="color: red;">[{{ error }}]</span> {% endfor %}
         </p>
         <p>
-            {{ grafo.vertices.label }}<br> {{ grafo.vertices(size=32) }} {% for error in grafo.vertices.errors %}
+            {{ grafo.nodos.label }}<br> {{ grafo.nodos(size=64, value="Talca, Paris, Londres") }} {% for error in grafo.nodos.errors %}
             <!-- Se tiene una validacion de errores..  for error in grafo... xD -->
-            <span style="color: red;">[{{ error }}]</span> {% endfor %}
-        </p>
-        <p>
-            {{ grafo.aristas.label }}<br> {{ grafo.aristas(size=32) }} {% for error in grafo.aristas.errors %}
             <span style="color: red;">[{{ error }}]</span> {% endfor %}
         </p>
         <p>{{ grafo.submit() }}</p>
