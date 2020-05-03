@@ -139,15 +139,10 @@ def kruskal(graph):
     # Para todo vértice v en G.V
     for v in graph['vertices']:
         generar_conjuntos(v)
-    print ("Sub gráficos creados:")
-    print (base)
     # Ordena la lista G.A en forma no decendente por su peso w
     # En este caso usamos el ordenador dentro de python
     Aristas = list(graph['Aristas'])
     Aristas.sort(key=itemgetter(2))
-    print ("Aristas ordenadas:")
-    print (Aristas)
-
     # Para toda arista(u,v) en G.A
     for e in Aristas:
         (u,v,peso)  = e

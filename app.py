@@ -38,18 +38,23 @@ def tarea1():
         elif form.tarea.data == 'flujo':
             print("¡¡¡   IMPLEMENTAR FLUJO MÁXIMO   !!!")         #¡¡¡IMPLEMENTAR FLUJO MÁXIMO!!!
 
-        elif form.tarea.data == 'kruskal':                                                       
+        elif form.tarea.data == 'kruskal': 
+
+            AristasNuevas = getattr(grafo,'vertices') 
+            Vertices = []
+            for i in range (AristasNuevas):
+                Vertices.append(i)
+
             graph={
             'vertices': [0,1,2,3]
             ,
-            'Aristas': set([
-                (0,2,5.3),
-                (0,3,3.2),
-                (1,3,2.1),
-                (2,3,1.6),])
+            'Aristas': set(getattr(grafo,'aristas') )
             }    
             
-            kruskal(graph)
+            k=kruskal(graph)
+            print ("El resultado de la MTS:",k)
+            
+
 
 
 
