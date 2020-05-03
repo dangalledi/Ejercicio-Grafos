@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, url_for, redirect, send_file
 from forms import ClaseGrafo, PostForm
 from config import Config
 from nwfixes import fix, fix2
+from tarea1 import encontrar_camino_euleriano, encontrar_camino_hamiltoniano,
 
 #Librerias para los grafos
 import matplotlib
@@ -35,6 +36,17 @@ def tarea1():
         elif form.tarea.data == 'flujo':
             print("¡¡¡   IMPLEMENTAR FLUJO MÁXIMO   !!!")         #¡¡¡IMPLEMENTAR FLUJO MÁXIMO!!!
 
+        elif form.tarea.data == 'Grafo hamiltoniano':
+            if (encontrar_camino_hamiltoniano( grafo.aristas.data ) != False) :
+                encontrar_camino_hamiltoniano( grafo.aristas.data )  ## Retorna una lista 
+
+
+        elif form.tarea.data == 'Grafo euleriano':
+            if (es_euleriano_interrogacion_xD( grafo.vertices.data,grafo.aristas.data )==True ):  
+                 encontrar_camino_euleriano( grafo.aristas.data )  ## Retorna una lista 
+            else
+                #no es un grafo euleriano :)   
+            
         elif form.tarea.data == 'actualizar':
             grafo.vectores.clear()
             grafo.aristas.clear()

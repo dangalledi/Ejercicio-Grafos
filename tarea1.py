@@ -16,19 +16,19 @@ def matriz_de_adyacencia(nodos,aristas):
 
 #Matriz de Camino --> Direccionada 
 def matriz_de_adyacencia_direccionada(nodos,aristas):
-    MatrizCaminos = []
+    MatrizCaminosDireccionada = []
     for i in range(len(nodos)):
-        MatrizCaminos.append([])
+        MatrizCaminosDireccionada.append([])
         for j in range(len(nodos)):
-            MatrizCaminos[i].append(0)
+            MatrizCaminosDireccionada[i].append(0)
 
     for c in aristas:
         for a in range(len(nodos)):
             for b in range(len(nodos)):
                 if ((a+1 == int(c[0]) and b+1 ==int(c[1]))):
-                    MatrizCaminos[a][b]=MatrizCaminos[a][b]+1
-
-    return MatrizCaminos
+                    MatrizCaminosDireccionada[a][b]=MatrizCaminosDireccionada[a][b]+1
+                    
+    return MatrizCaminosDireccionada
 
 
 def encontrar_camino_euleriano(aristas):
@@ -55,7 +55,7 @@ def encontrar_camino_euleriano(aristas):
             
     return camino
 
-def lista_de_grados_de_nodos(matriz):
+def lista_de_grados_de_nodos(matriz,nodos):
 
     listaGrados = []
     for a in range(len(nodos)):                         
@@ -97,6 +97,26 @@ def encontrar_camino_hamiltoniano(aristas,nodos):
     else:
         print ('Es hamiltoniano')
         return camino
-
+        
     return caminito
     
+def es_euleriano_interrogacion_xD (nodos,aristas):
+    auxiliar= 0
+    auxiliargrado = 0
+    Matriz_Adyacencia = matriz_de_adyacencia(nodos,aristas)   
+    for i in lista_de_grados_de_nodos(Matriz_Adyacencia,nodos):         
+        if (i%2==0):
+            auxiliar = auxiliar +1
+        else:
+            auxiliargrado = auxiliargrado + 1
+
+    if(auxiliar != (len(nodos)) or encontrar_camino_euleriano == False):
+        print('No es Euleriano')
+        return False
+    elif (auxiliargrado%2 == 0 and (auxiliar == (len(nodos))-auxiliargrado)):
+        print ('Es Euleriano')
+        return True
+    else:
+        print('Es Euleriano :)')
+        return True
+    return 0
