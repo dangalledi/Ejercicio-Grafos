@@ -17,6 +17,6 @@ class ClaseGrafo(FlaskForm):
 class PostForm(FlaskForm):
     origen = SelectField("Origen: ", choices = [ ]) #
     destino = SelectField("Destino: ",choices = [ ]) #
-    tarea = SelectField('Tarea: ', choices = [('actualizar','Actualizar grafo'),('agregar','Agregar arista al Grafo'),('corto','Mostrar camino más corto'),('flujo','Indicar el flujo máximo'),('hoe','Hamilton o Euler'),('prim','Obtener Árbol (PRIM)'),('kruskal','Obtener Árbol (KRUSKAL)')])
+    tarea = SelectField('Tarea: ', choices = [('actualizar','Actualizar grafo'),('agregar','Agregar arista al Grafo'),('corto','Mostrar camino más corto'),('flujo','Indicar el flujo máximo'),('hoe','Hamilton o Euler'),('kruskal','Obtener Árbol (KRUSKAL)')])
     peso = StringField("Peso: ",validators = [] ) # [DataRequired()]
     submit = SubmitField('      Realizar        ')

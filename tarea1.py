@@ -1,4 +1,6 @@
 #Matriz de Camino --> Simple 
+from operator import itemgetter
+
 def matriz_de_adyacencia(nodos,aristas):
     MatrizCaminos = []
     for i in range(len(nodos)):
@@ -99,4 +101,66 @@ def encontrar_camino_hamiltoniano(aristas,nodos):
         return camino
 
     return caminito
+
+#Variables para kruskal 
+base = dict()
+ord = dict()   
+
+    # Función para generar conuntos
+def generar_conjuntos(v):
+    base[v] = v
+    ord[v] = 0
+
+# Implementación de la función de búsqueda 
+# de manera recursiva
+def Buscar(v):
+    if base[v] != v:
+        base[v] = Buscar(base[v])
+    return base[v]
+
+# Implementación de la unión de conjuntos
+def union(u, v):
+    v1 = Buscar(u)
+    v2 = Buscar(v)
+    if v1 != v2:
+        if ord[v1] > ord[v2]:
+            base[v2] = v1 
+        else:
+            base[v1] = v2
+            if ord[v1] == ord[v2]: 
+                ord[v2] += 1
     
+    # Función principal del algoritmo Kruskal
+def kruskal(ver,ar):
+
+    # A = {conjunto vacío}
+    mst = set()
+   
+    # Para todo vértice v en G.V
+    for v in ver:
+        generar_conjuntos(v)
+    print ("Sub gráficos creados:")
+    print (base)
+
+    # Ordena la lista G.A en forma no decendente por su peso w
+    # En este caso usamos el ordenador dentro de python
+    Aristas = list(ar)
+
+    Aristas.sort(key=itemgetter(2))
+    
+    
+
+    print ("Aristas ordenadas:")
+    print (Aristas)
+
+    # Para toda arista(u,v) en G.A
+    for e in Aristas:
+        (u,v,peso)  = e
+        if Buscar(u) != Buscar(v):
+            # A = A union (u,v)
+            union(u, v)
+            # Union(u,v)
+            mst.add(e)
+    return mst 
+
+

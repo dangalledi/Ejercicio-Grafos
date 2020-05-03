@@ -2,6 +2,9 @@ from flask import Flask, render_template, request, url_for, redirect, send_file
 from forms import ClaseGrafo, PostForm
 from config import Config
 from nwfixes import fix, fix2
+from networkx.classes import graph
+from networkx.algorithms.tree import mst
+from tarea1 import kruskal
 
 #Librerias para los grafos
 import matplotlib
@@ -34,6 +37,26 @@ def tarea1():
         
         elif form.tarea.data == 'flujo':
             print("¡¡¡   IMPLEMENTAR FLUJO MÁXIMO   !!!")         #¡¡¡IMPLEMENTAR FLUJO MÁXIMO!!!
+
+        elif form.tarea.data == 'kruskal':
+            
+            V = [] #Lista donde se guardaran los vertices
+            if  (grafo.nodos.data).isdigit() == True:# if de si el ingreso son solo números implicitamente se deduce grafo no etiquetado
+
+                for k in range( getattr(grafo,'vertices') ):# se rellena la lista respecto a la cantidad de vertices
+                    V.append(k) #Se agrega el valor a la lista
+                Resultado = kruskal(V,grafo.aristas.data)
+                print ("Resultado MST:")
+                print (Resultado)
+            else:
+                for k in range( getattr(grafo,'vertices') ):# se rellena la lista en base al largo de la lista generada en vertices o el valor de vertices
+                    V.append(k) #Se agrega el valor a la lista
+                Resultado = kruskal(V,grafo.aristas.data)
+                print ("Resultado MST:")
+                print (Resultado)
+
+
+            
 
         elif form.tarea.data == 'actualizar':
             grafo.vectores.clear()
