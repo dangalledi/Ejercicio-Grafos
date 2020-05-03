@@ -152,15 +152,17 @@ def es_euleriano_interrogacion_xD (nodos,aristas):
 
     # Función principal del algoritmo Kruskal
 def kruskal(graph):
-    # A = {conjunto vacío}
-    mst = set()
+    mst = set() #convierte a mst en un conjunto vacío
     # Para todo vértice v en G.V
     for v in graph['vertices']:
         generar_conjuntos(v)
     # Ordena la lista G.A en forma no decendente por su peso w
     # En este caso usamos el ordenador dentro de python
-    Aristas = list(graph['Aristas'])
+    Aristas = list(graph['Aristas']) #lo convierte nuevamente a lista para poder usar sort()
     Aristas.sort(key=itemgetter(2))
+    print ("Aristas ordenadas:")
+    print (Aristas)
+
     # Para toda arista(u,v) en G.A
     for e in Aristas:
         (u,v,peso)  = e
@@ -168,7 +170,7 @@ def kruskal(graph):
             # A = A union (u,v)
             union(u, v)
             # Union(u,v)
-            mst.add(e)
+            mst.add(e) #se adhieren al conjunto msd el elemento e=(u,v,peso) generado
     return mst 
 
 def Conexo(s,M,n):

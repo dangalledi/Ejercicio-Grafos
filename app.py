@@ -69,6 +69,42 @@ def tarea1():
             G=getattr(grafo,'aristas') #Aristas tipo (int,int,float)
             Matriz(G, N)         #Implementacion conexo
 
+            #Si lo que entra es una lista de etiquetas
+            if(grafo.nodos.data).isdigit() == True:
+                
+                #AristasNuevas = getattr(grafo,'vertices')
+                Vertices = []
+                for i in range (int(grafo.nodos.data)):
+                    Vertices.append(i)
+
+                graph={
+                'vertices': Vertices
+                ,
+                'Aristas': set(getattr(grafo,'aristas') )
+                }    
+                
+                k=kruskal(graph)
+                
+
+                print ("El resultado de la MTS:",k)
+
+        #Si lo que entra es el numero de vertices
+            else:
+                AristasNuevas = grafo.nodos.data 
+                Vertices = []
+                for i in range (len(AristasNuevas)):
+                    Vertices.append(i)
+
+                graph={
+                'vertices': Vertices
+                ,
+                'Aristas': set(getattr(grafo,'aristas') )
+                }    
+                
+                k=kruskal(graph)
+                
+                print ("El resultado de la MTS:",k)
+
         elif form.tarea.data == 'actualizar':
             grafo.vectores.clear()
             grafo.aristas.clear()
@@ -79,6 +115,11 @@ def tarea1():
         print("tipo de grafo:",grafo.tipo.data)         # print de consola
         print("nodos seleccionados para tarea (n°: origen, destino): ("+form.origen.data+", "+form.destino.data+")")         # print de consola
         print("vectores $$$$$$$$$$$$$$$$$$$ = : ",getattr(grafo,"vectores"))
+
+
+
+
+
         
         grafo.nombre.data = grafo.nombre.data.replace(' ','')
         if  (grafo.nodos.data).isdigit() == True:           # if de si el ingreso son solo números implicitamente se deduce grafo no etiquetado
