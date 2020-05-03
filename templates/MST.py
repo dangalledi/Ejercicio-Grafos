@@ -3,6 +3,8 @@
 
 from networkx.classes import graph
 from networkx.algorithms.tree import mst #Algorimo para calcular los min/max
+from operator import itemgetter #proporciona funciones para hacer que las 
+                                #funciones de acceso sean más fáciles y rápidas, al buscar en las listas.
 
 # Variables globales
 base = dict()
@@ -44,17 +46,20 @@ def kruskal(graph):
     print ("Sub gráficos creados:")
     print (base)
 
-    # Ordena la lista G.E en forma no decendente por su peso w
+    # Ordena la lista G.A en forma no decendente por su peso w
     # En este caso usamos el ordenador dentro de python
     Aristas = list(graph['Aristas'])
-    Aristas.sort()
+
+    Aristas.sort(key=itemgetter(2))
     
+    
+
     print ("Aristas ordenadas:")
     print (Aristas)
 
-    # Para toda arista(u,v) en G.E
+    # Para toda arista(u,v) en G.A
     for e in Aristas:
-        weight, u, v = e
+        (u,v,peso)  = e
         if Buscar(u) != Buscar(v):
             # A = A union (u,v)
             union(u, v)
@@ -63,19 +68,20 @@ def kruskal(graph):
     return mst 
 
 graph={
-'vertices': ['a','b','c','d','e','f'],
+'vertices': [1,2,3,4,5,6],
 'Aristas': set([
-    (5,'a','c'),
-    (3,'a','d'),
-    (2,'b','d'),
-    (1,'c','d'),
-    (5,'f','d'),
-    (3,'b','f'),
-    (6,'f','e'),
-    (1,'a','b'),
-    (1,'f','b')
-    ])
-}
+    (1,3,5),
+    (1,4,3),
+    (2,4,2),
+    (3,4,1),
+    (6,4,5),
+    (2,6,3),
+    (6,5,6),
+    (1,2,5),
+    (2,1,1)])
+    
+    }
+
 
 k = kruskal(graph)
 print ("Resultado MST:")
