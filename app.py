@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, url_for, redirect, send_file
 from forms import ClaseGrafo, PostForm
 from config import Config
 from nwfixes import fix, fix2
-
+from FlujoMaximo import Graph,fix_arreglo,creacion_matriz
 from networkx.classes import graph #???????
 from networkx.algorithms.tree import mst #???????
 from tarea1 import kruskal, Matriz, encontrar_camino_euleriano ,encontrar_camino_hamiltoniano ,es_euleriano_interrogacion_xD, cant_nodos
@@ -21,7 +21,7 @@ app.config.from_object(Config)
 # Ruta home 
 @app.route('/')   
 def home():
-    return render_template('home.html')
+    return render_template('pre-load.html')
 
 # Ruta tarea 1 
 @app.route('/tarea1', methods = ['GET', 'POST'])      
@@ -38,7 +38,22 @@ def tarea1():
             print("¡¡¡   IMPLEMENTAR ALGORITMO DE DJISKTRA   !!!")            # ¡¡¡IMPLEMENTAR ALGORITMO DE DJISKTRA!!!
         
         elif form.tarea.data == 'flujo':
-            print("¡¡¡   IMPLEMENTAR FLUJO MÁXIMO   !!!")         #¡¡¡IMPLEMENTAR FLUJO MÁXIMO!!!
+            cantidad_nodos = getattr(grafo,'vertices')
+            matriz_tal_por_cual = grafo.aristas
+            print(cantidad_nodos)
+            print(matriz_tal_por_cual)
+            origen_nodo = int(form.origen.data)
+            destino_nodo = int(form.destino.data)
+
+
+            fix_grafo = fix_arreglo(cantidad_nodos,matriz_tal_por_cual)
+            print(fix_grafo)
+
+
+            g = Graph(fix_grafo)
+            result = g.algoritmo_FM(origen_nodo,destino_nodo)
+
+            print ("Flujo Maximo /////////////////////////////////////",result)
 
         elif form.tarea.data == 'hamiltoniano':
             aristas=getattr(grafo,'aristas') #Aristas tipo (int,int,float)
@@ -145,7 +160,7 @@ def grafica(nodos,tipo,nombre,etiquetas,etiquetado,vectores):
         for i in range(nodos):
             G.add_node(i)
 
-    if vectores != "[]":
+    if vectores != "[]" and etiquetado==True:
         j = fix(vectores,dic_etiquetas)
         G.add_edges_from(j)
 

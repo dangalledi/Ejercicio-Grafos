@@ -1,23 +1,31 @@
-<!DOCTYPE html> {% extends "layout.html" %} {% block content %}
+{% extends "layout.html" %} {% block content %}
 
-<!-- dentro del container "jumbotron" agregado desde bootstrap, se encuentra el formulario para ingresar el grafo-->
-
-<div class="jumbotron">
-    <form action=" " method="POST" novalidate>
-        <p class="lead">Ingresa los datos solicitados para dibujar el grafo</p>
-        <p>
-            {{ grafo.tipo.label }} <br> {{ grafo.tipo }}     <!--<input type = 'checkbox' name = 'etiquetado' value = 'true'> Etiquetado checkbox pa saber si se etiqueta o no-->
-        </p>
-        <p>
-            {{ grafo.nombre.label }} <br> {{ grafo.nombre(size=32, value="Last Train To London") }} {% for error in grafo.nombre.errors %}
-            <span style="color: red;">[{{ error }}]</span> {% endfor %}
-        </p>
-        <p>
-            {{ grafo.nodos.label }} <br> {{ grafo.nodos(size=64, value="Talca, Paris, Londres") }} {% for error in grafo.nodos.errors %}
-            <!-- Se tiene una validacion de errores..  for error in grafo... xD -->
-            <span style="color: red;">[{{ error }}]</span> {% endfor %}
-        </p>
-        <p>{{ grafo.submit() }}</p>
-    </form>
+<div id="info">
+    <div class="jumbotron">
+        <h1><strong>BIENVENIDO</strong></h1>
+        <p id="text-info">Con esta pagina web seras capaz de generar imagenes de distintos tipos de grafos, encontrar el camino mas corto entre dos vertices y ademas conocer la categoria a la cual pertenece.</p>
+    </div>
 </div>
-{% endblock %}
+
+<div id="info2">
+    <div class="jumbotron">
+        <form action=" " method="POST" novalidate>
+            <p class="lead">Ingresa los datos solicitados para dibujar el grafo</p>
+            <p>
+                {{ grafo.tipo.label }} <br> {{ grafo.tipo(class="form-control form-control") }}     <!--<input type = 'checkbox' name = 'etiquetado' value = 'true'> Etiquetado checkbox pa saber si se etiqueta o no-->
+            </p>
+            <p>
+                {{ grafo.nombre.label }} <br> {{ grafo.nombre(class="form-control form-contro") }} {% for error in grafo.nombre.errors %}
+                <span style="color: red;">[{{ error }}]</span> {% endfor %}
+            </p>
+            <p>
+                {{ grafo.nodos.label }} <br> {{ grafo.nodos(class="form-control form-control") }} {% for error in grafo.nodos.errors %}
+                <!-- Se tiene una validacion de errores..  for error in grafo... xD -->
+                <span style="color: red;">[{{ error }}]</span> {% endfor %}
+            </p>
+            <p id="boton">{{ grafo.submit(class="btn btn-primary m-3") }}</p>
+        </form>
+    </div>
+</div>
+
+{% endblock%}
