@@ -38,22 +38,25 @@ def tarea1():
         elif form.tarea.data == 'flujo':
             print("¡¡¡   IMPLEMENTAR FLUJO MÁXIMO   !!!")         #¡¡¡IMPLEMENTAR FLUJO MÁXIMO!!!
 
-        elif form.tarea.data == 'kruskal':
+        elif form.tarea.data == 'kruskal':                                                       
+            graph={
+            'vertices': [0,1,2,3]
+            ,
+            'Aristas': set([
+                (0,2,5.3),
+                (0,3,3.2),
+                (1,3,2.1),
+                (2,3,1.6),])
+            }    
             
-            V = [] #Lista donde se guardaran los vertices
-            if  (grafo.nodos.data).isdigit() == True:# if de si el ingreso son solo números implicitamente se deduce grafo no etiquetado
+            kruskal(graph)
 
-                for k in range( getattr(grafo,'vertices') ):# se rellena la lista respecto a la cantidad de vertices
-                    V.append(k) #Se agrega el valor a la lista
-                Resultado = kruskal(V,grafo.aristas.data)
-                print ("Resultado MST:")
-                print (Resultado)
-            else:
-                for k in range( getattr(grafo,'vertices') ):# se rellena la lista en base al largo de la lista generada en vertices o el valor de vertices
-                    V.append(k) #Se agrega el valor a la lista
-                Resultado = kruskal(V,grafo.aristas.data)
-                print ("Resultado MST:")
-                print (Resultado)
+
+
+
+
+            
+
 
 
             

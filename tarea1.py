@@ -102,7 +102,9 @@ def encontrar_camino_hamiltoniano(aristas,nodos):
 
     return caminito
 
-#Variables para kruskal 
+#Implementacion de Kruskal
+
+#Variables para Kruskal 
 base = dict()
 ord = dict()   
 
@@ -131,25 +133,18 @@ def union(u, v):
                 ord[v2] += 1
     
     # Función principal del algoritmo Kruskal
-def kruskal(ver,ar):
-
+def kruskal(graph):
     # A = {conjunto vacío}
     mst = set()
-   
     # Para todo vértice v en G.V
-    for v in ver:
+    for v in graph['vertices']:
         generar_conjuntos(v)
     print ("Sub gráficos creados:")
     print (base)
-
     # Ordena la lista G.A en forma no decendente por su peso w
     # En este caso usamos el ordenador dentro de python
-    Aristas = list(ar)
-
+    Aristas = list(graph['Aristas'])
     Aristas.sort(key=itemgetter(2))
-    
-    
-
     print ("Aristas ordenadas:")
     print (Aristas)
 
@@ -162,5 +157,3 @@ def kruskal(ver,ar):
             # Union(u,v)
             mst.add(e)
     return mst 
-
-
