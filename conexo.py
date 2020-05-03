@@ -1,4 +1,4 @@
-from collections import deque #Libreria para colas
+from queue import Queue #Libreria para colas
 import numpy as np #Libreria para la matriz
 
 #Ejemplo
