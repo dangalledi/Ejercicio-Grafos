@@ -5,9 +5,8 @@ from nwfixes import fix, fix2
 
 from networkx.classes import graph #???????
 from networkx.algorithms.tree import mst #???????
-from tarea1 import kruskal,encontrar_camino_euleriano ,encontrar_camino_hamiltoniano ,es_euleriano_interrogacion_xD
+from tarea1 import kruskal, Matriz, encontrar_camino_euleriano ,encontrar_camino_hamiltoniano ,es_euleriano_interrogacion_xD
 from dijkstra import dijkstra
-
 
 #Librerias para los grafos
 import matplotlib
@@ -64,7 +63,12 @@ def tarea1():
             
             k=kruskal(graph)
             print ("El resultado de la MTS:",k)
-            
+
+        elif form.tarea.data == 'conexo':
+            N=getattr(grafo,'vertices')
+            G=getattr(grafo,'aristas') #Aristas tipo (int,int,float)
+            Matriz(G, N)         #Implementacion conexo
+
         elif form.tarea.data == 'actualizar':
             grafo.vectores.clear()
             grafo.aristas.clear()
@@ -92,7 +96,7 @@ def tarea1():
             form.origen.choices = [(i,str(i)+": "+etiquetas[i]) for i in range(len(etiquetas))]         # la otra manera si es un nodo etiquetado
             form.destino.choices = [(i,str(i)+": "+etiquetas[i]) for i in range(len(etiquetas))]        # la otra manera si es un nodo etiquetado
             setattr(grafo,'vertices',len(etiquetas))            # se le asigna al atributo vertices del grafo el largo de la lista
-            
+
             print("nodos etiquetados:",etiquetas)           # print de consola
             print("cantidad de vertices del grafo:",getattr(grafo,'vertices'))          # print de consola
         
@@ -116,7 +120,6 @@ def grafica(nodos,tipo,nombre,etiquetas,etiquetado,vectores):
     else:
         for i in range(nodos):
             G.add_node(i)
-
 
     if vectores != "[]":
         j = fix(vectores,dic_etiquetas)

@@ -1,3 +1,5 @@
+from operator import itemgetter
+from queue import Queue #Libreria para colas
 import numpy as np
 
 def traductor (aristas):  #[(int,int,float),(int,int,float),...,(int,int,float)]
@@ -168,3 +170,33 @@ def kruskal(graph):
             # Union(u,v)
             mst.add(e)
     return mst 
+
+def Conexo(s,M,n):
+    visitado=np.zeros(n) #arreglo de ceros, cambia a 1 si es visitado
+    cola = Queue()
+    cola.put(s)
+    visitado[s]=1
+    while not cola.empty():
+        s = cola.get()
+        for i in range(n):
+            if(visitado[i]==0):
+                if (M[s][i]==1):
+                    cola.put(i)
+                    visitado[i] = 1
+    total=0
+    for j in range(len(visitado)):
+        total = total + visitado[j]
+    if total == n: 
+        print("El grafo es conexo")
+    else: 
+        print("El Grafo no es conexo")
+
+def Matriz(grafo,n):
+    ma = np.zeros((n,n))
+    for i in range(len(grafo)): 
+        a=grafo[i][0]
+        b=grafo[i][1]
+        ma[a-1][b-1]=1
+        ma[b-1][a-1]=1
+    print(ma)
+    Conexo(0,ma,n)
