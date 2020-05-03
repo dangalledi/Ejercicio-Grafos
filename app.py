@@ -2,7 +2,12 @@ from flask import Flask, render_template, request, url_for, redirect, send_file
 from forms import ClaseGrafo, PostForm
 from config import Config
 from nwfixes import fix, fix2
-from tarea1 import encontrar_camino_euleriano ,encontrar_camino_hamiltoniano ,es_euleriano_interrogacion_xD
+
+from networkx.classes import graph #???????
+from networkx.algorithms.tree import mst #???????
+from tarea1 import kruskal,encontrar_camino_euleriano ,encontrar_camino_hamiltoniano ,es_euleriano_interrogacion_xD
+from dijkstra import dijkstra
+
 
 #Librerias para los grafos
 import matplotlib
@@ -40,10 +45,25 @@ def tarea1():
             if (encontrar_camino_hamiltoniano( grafo.aristas.data ) != False):
                 encontrar_camino_hamiltoniano( grafo.aristas.data )  ## Retorna una lista 
 
-
         elif form.tarea.data == 'euleriano':
             if (es_euleriano_interrogacion_xD( grafo.vertices.data,grafo.aristas.data )==True ):  
                  encontrar_camino_euleriano( grafo.aristas.data )  ## Retorna una lista  
+
+        elif form.tarea.data == 'arbol': 
+
+            AristasNuevas = getattr(grafo,'vertices') 
+            Vertices = []
+            for i in range (AristasNuevas):
+                Vertices.append(i)
+
+            graph={
+            'vertices': [0,1,2,3]
+            ,
+            'Aristas': set(getattr(grafo,'aristas') )
+            }    
+            
+            k=kruskal(graph)
+            print ("El resultado de la MTS:",k)
             
         elif form.tarea.data == 'actualizar':
             grafo.vectores.clear()
