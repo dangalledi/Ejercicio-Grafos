@@ -2,10 +2,12 @@ from flask import Flask, render_template, request, url_for, redirect, send_file
 from forms import ClaseGrafo, PostForm
 from config import Config
 from nwfixes import fix, fix2
+
 from networkx.classes import graph #???????
 from networkx.algorithms.tree import mst #???????
-from tarea1 import kruskal
+from tarea1 import kruskal,encontrar_camino_euleriano ,encontrar_camino_hamiltoniano ,es_euleriano_interrogacion_xD
 from dijkstra import dijkstra
+
 
 #Librerias para los grafos
 import matplotlib
@@ -38,6 +40,14 @@ def tarea1():
         
         elif form.tarea.data == 'flujo':
             print("¡¡¡   IMPLEMENTAR FLUJO MÁXIMO   !!!")         #¡¡¡IMPLEMENTAR FLUJO MÁXIMO!!!
+
+        elif form.tarea.data == 'hamiltoniano':
+            if (encontrar_camino_hamiltoniano( grafo.aristas.data ) != False):
+                encontrar_camino_hamiltoniano( grafo.aristas.data )  ## Retorna una lista 
+
+        elif form.tarea.data == 'euleriano':
+            if (es_euleriano_interrogacion_xD( grafo.vertices.data,grafo.aristas.data )==True ):  
+                 encontrar_camino_euleriano( grafo.aristas.data )  ## Retorna una lista  
 
         elif form.tarea.data == 'arbol': 
 

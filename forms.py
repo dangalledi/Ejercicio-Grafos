@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField,FloatField
 from wtforms.validators import DataRequired
 
 #Creacion de clases donde se reciben los datos del formulario 
@@ -16,6 +16,6 @@ class ClaseGrafo(FlaskForm):
 class PostForm(FlaskForm):
     origen = SelectField("Origen: ", choices = [ ]) #
     destino = SelectField("Destino: ",choices = [ ]) #
-    tarea = SelectField('Tarea: ', choices = [('actualizar','Actualizar grafo'),('agregar','Agregar arista al Grafo'),('corto','Mostrar camino más corto'),('flujo','Indicar el flujo máximo'),('hoe','Hamilton o Euler'),('arbol','Obtener Árbol Generador Mínimo')])
-    peso = StringField("Peso: ",validators = [] ) # [DataRequired()]
+    tarea = SelectField('Tarea: ', choices = [('actualizar','Actualizar grafo'),('agregar','Agregar arista al Grafo'),('corto','Mostrar camino más corto'),('flujo','Indicar el flujo máximo'),('hoe','Hamilton o Euler'),('arbol','Obtener Árbol Generador Mínimo'),('prim','Obtener Árbol (PRIM)'),('kruskal','Obtener Árbol (KRUSKAL)'),('hamiltoniano','Grafo hamiltoniano'),('euleriano','Grafo euleriano')])
+    peso = StringField("Peso: ",validators = [FloatField()] ) 
     submit = SubmitField('      Realizar        ')
