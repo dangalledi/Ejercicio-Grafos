@@ -213,7 +213,7 @@ def Conexo(s,M,n):
     else: 
         print("El Grafo no es conexo")
 
-def Matriz(grafo,n):
+def Matriz(grafo,n): #Imprime la matriz de ady y manda a la matriz a la funcion de conexo
     ma = np.zeros((n,n))
     for i in range(len(grafo)): 
         a=grafo[i][0]
@@ -223,7 +223,7 @@ def Matriz(grafo,n):
     print(ma)
     Conexo(0,ma,n)
 
-def cant_nodos(g):
+def cant_nodos(g): #Saber la cantidad de nodos a partir de las aristas
     mayor=0
     for i in range(len(g)):
         for j in range(2):

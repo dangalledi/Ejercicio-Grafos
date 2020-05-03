@@ -53,11 +53,10 @@ def tarea1():
                  encontrar_camino_euleriano( aristas )  ## Retorna una lista
                  print ('Camino euleriano: ',encontrar_camino_euleriano( aristas ) )
 
-        elif (form.tarea.data == 'conexo'): # and getattr(grafo,'vertices') != 0
+        elif (form.tarea.data == 'conexo'): #Funcion si es conexo o no conexo
             G=getattr(grafo,'aristas') #Aristas tipo (int,int,float)
-            N=cant_nodos(G)+1
-            print("N =", N)
-            Matriz(G, N)         #Implementacion conexo
+            N=cant_nodos(G)+1 #Cantidad de nodos
+            Matriz(G, N)  #Implementacion conexo
 
         elif form.tarea.data == 'kruskal': 
             #Si lo que entra es una lista de etiquetas
