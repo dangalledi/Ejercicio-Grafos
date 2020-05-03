@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, url_for, redirect, send_file
 from forms import ClaseGrafo, PostForm
 from config import Config
 from nwfixes import fix, fix2
+from tarea1 import Matriz
 
 #Librerias para los grafos
 import matplotlib
@@ -34,6 +35,9 @@ def tarea1():
         
         elif form.tarea.data == 'flujo':
             print("¡¡¡   IMPLEMENTAR FLUJO MÁXIMO   !!!")         #¡¡¡IMPLEMENTAR FLUJO MÁXIMO!!!
+        
+        elif form.tarea.data == 'conexo':
+            Matriz(grafo.aristas.data, grafo.nodos.data)         #Implementacion conexo
 
         elif form.tarea.data == 'actualizar':
             grafo.vectores.clear()

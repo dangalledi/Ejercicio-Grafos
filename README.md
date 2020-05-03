@@ -16,7 +16,7 @@ pip install -r requirements.txt
 Y luego ejecute index.py
 
 ```bash
-python index.py
+python app.py
 ```
 ## Integrantes
 + Jennifer Portiño
