@@ -55,11 +55,9 @@ def tarea1():
             print ("El resultado de la MTS:",k)
         
         elif form.tarea.data == 'conexo':
-            N=3
-            G=getattr(grafo,'aristas')
+            N=getattr(grafo,'vertices')
+            G=getattr(grafo,'aristas') #Aristas tipo (int,int,float)
             Matriz(G, N)         #Implementacion conexo
-            print("Hola",N)
-            print("x",G)
 
         elif form.tarea.data == 'actualizar':
             grafo.vectores.clear()
