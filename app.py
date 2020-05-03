@@ -2,9 +2,10 @@ from flask import Flask, render_template, request, url_for, redirect, send_file
 from forms import ClaseGrafo, PostForm
 from config import Config
 from nwfixes import fix, fix2
-from networkx.classes import graph
-from networkx.algorithms.tree import mst
+from networkx.classes import graph #???????
+from networkx.algorithms.tree import mst #???????
 from tarea1 import kruskal
+from dijkstra import dijkstra
 
 #Librerias para los grafos
 import matplotlib
@@ -38,7 +39,7 @@ def tarea1():
         elif form.tarea.data == 'flujo':
             print("¡¡¡   IMPLEMENTAR FLUJO MÁXIMO   !!!")         #¡¡¡IMPLEMENTAR FLUJO MÁXIMO!!!
 
-        elif form.tarea.data == 'kruskal': 
+        elif form.tarea.data == 'arbol': 
 
             AristasNuevas = getattr(grafo,'vertices') 
             Vertices = []
@@ -54,18 +55,6 @@ def tarea1():
             k=kruskal(graph)
             print ("El resultado de la MTS:",k)
             
-
-
-
-
-
-
-            
-
-
-
-            
-
         elif form.tarea.data == 'actualizar':
             grafo.vectores.clear()
             grafo.aristas.clear()
