@@ -3,7 +3,6 @@ from forms import ClaseGrafo, PostForm
 from config import Config
 from nwfixes import fix, fix2
 from FlujoMaximo import Graph,fix_arreglo,creacion_matriz
-from networkx.algorithms.tree import mst 
 from tarea1 import kruskal, Matriz, encontrar_camino_euleriano ,encontrar_camino_hamiltoniano ,es_euleriano_interrogacion_xD, cant_nodos
 from dijkstra import dijkstra
 
