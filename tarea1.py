@@ -85,6 +85,7 @@ def encontrar_camino_hamiltoniano(aristas):
     aristas = traductor(aristas)
     camino = []
     caminito =[]
+    no_hay_caminito = []
     arista=[]
     for c in aristas:
         arista.append(c)
@@ -103,7 +104,7 @@ def encontrar_camino_hamiltoniano(aristas):
                 camino.append(vertice_actual)
     if (len(aristas)<2):
         print ('No es hamiltoniano')
-        return False            
+        return no_hay_caminito             
     if(len(camino)<(len(nodos))+1 ):
         for i in aristas:    
             if((i[0]== camino[int(len(camino)/2)] and i[1]== camino[int(len(camino)/2)-1]) or( i[0]== camino[int(len(camino)/2)-1] and i[1]== camino[int(len(camino)/2)])):
@@ -213,7 +214,7 @@ def Conexo(s,M,n):
     else: 
         print("El Grafo no es conexo")
 
-def Matriz(grafo,n): #Imprime la matriz de ady y manda a la matriz a la funcion de conexo
+def Matriz(grafo,n):
     ma = np.zeros((n,n))
     for i in range(len(grafo)): 
         a=grafo[i][0]

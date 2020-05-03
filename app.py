@@ -42,16 +42,17 @@ def tarea1():
 
         elif form.tarea.data == 'hamiltoniano':
             aristas=getattr(grafo,'aristas') #Aristas tipo (int,int,float)
-            if (encontrar_camino_hamiltoniano( aristas) != False):
-                encontrar_camino_hamiltoniano( aristas )  ## Retorna una lista 
-                print ('Camino Hamiltoniano: ',encontrar_camino_hamiltoniano( aristas ) )
+            hamiltoniano = encontrar_camino_hamiltoniano( aristas )
+            if (hamiltoniano):
+                print ('Camino Hamiltoniano: ', hamiltoniano) ## Retorna una lista 
 
         elif form.tarea.data == 'euleriano':
-            aristas=getattr(grafo,'aristas')
             aristas=getattr(grafo,'aristas') #Aristas tipo (int,int,float)
-            if (es_euleriano_interrogacion_xD( aristas ) == True ):  
-                 encontrar_camino_euleriano( aristas )  ## Retorna una lista
-                 print ('Camino euleriano: ',encontrar_camino_euleriano( aristas ) )
+            euleriano = es_euleriano_interrogacion_xD( aristas )
+            if ( type(euleriano) != False ):   
+                camino = encontrar_camino_euleriano(aristas)
+                print ('Grafo euleriano: ', euleriano)
+                print ('Camino euleriano: ', camino)
 
         elif (form.tarea.data == 'conexo'): #Funcion si es conexo o no conexo
             G=getattr(grafo,'aristas') #Aristas tipo (int,int,float)
