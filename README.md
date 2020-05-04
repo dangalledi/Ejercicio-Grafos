@@ -13,10 +13,10 @@ pip install -r requirements.txt
 
 ## Ejecución con el servidor
 
-Y luego ejecute index.py
+Y luego ejecute app.py
 
 ```bash
-python index.py
+python app.py
 ```
 ## Integrantes
 + Jennifer Portiño
@@ -24,5 +24,3 @@ python index.py
 + Oscar Peñaloza
 + Edgar Matus
 + Daniela Galleguillos
-
-[ Readme en construcción ] 
