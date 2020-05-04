@@ -17,5 +17,5 @@ class PostForm(FlaskForm):
     origen = SelectField("Origen: ", choices = [ ]) #
     destino = SelectField("Destino: ",choices = [ ]) #
     tarea = SelectField('Tarea: ', choices = [('actualizar','Actualizar grafo'),('agregar','Agregar arista al Grafo'),('corto','Mostrar camino más corto'),('flujo','Indicar el flujo máximo'),('hoe','Hamilton o Euler'),('arbol','Obtener Árbol Generador Mínimo'),('hamiltoniano','Grafo hamiltoniano'),('euleriano','Grafo euleriano'),('conexo','Saber si es conexo')])
-    peso = StringField("Peso: ",validators = [FloatField()] ) 
+    peso = FloatField("Peso: ",validators = [] ) 
     submit = SubmitField('      Realizar        ')

@@ -30,8 +30,6 @@ def tarea1():
     error = ''
     if request.method == 'POST':
         
-        
-        
         grafo.nombre.data = grafo.nombre.data.replace(' ','')
         if  (grafo.nodos.data).isdigit() == True:           # if de si el ingreso son solo números implicitamente se deduce grafo no etiquetado
             grafo.etiquetado.data = False           # atributo booleano etiquetado del grafo se hace falso
@@ -51,10 +49,14 @@ def tarea1():
 
             print("nodos etiquetados:",etiquetas)           # print de consola
             print("cantidad de vertices del grafo:",getattr(grafo,'vertices'))          # print de consola
+        
+        if isinstance(form.peso.data, float) == False  and form.tarea.data == 'agregar':
+            error = "El peso debe ser un numérico decimal"
+            return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'), message = error)
 
-        if  form.tarea.data == 'agregar' and form.destino.data[0].isdigit() == True and ((int(form.origen.data),int(form.destino.data),float(form.peso.data))) not in getattr(grafo,'aristas'):
+        if  form.tarea.data == 'agregar' and form.destino.data[0].isdigit() == True and ((int(form.origen.data),int(form.destino.data))) not in getattr(grafo,'vectores') and form.origen.data != form.destino.data:
             grafo.vectores.append((int(form.origen.data),int(form.destino.data)))
-            grafo.aristas.append((int(form.origen.data),int(form.destino.data),float(form.peso.data)))            # si el primer caracter del string es dígito lo agrega como vector a aristas
+            grafo.aristas.append((int(form.origen.data),int(form.destino.data),form.peso.data))            # si el primer caracter del string es dígito lo agrega como vector a aristas
             # al estar vacío el atributo aristas, la 1era vez toma la N de None y no se pueden repetir
         
         elif form.tarea.data == 'corto':
@@ -142,13 +144,15 @@ def tarea1():
         if grafo.nodos.data == '' or grafo.nombre.data == '':
             error = "estos campos no pueden quedar vacíos :/"
             return render_template("tarea1.html", grafo = grafo, message = error)
-        
-        if isinstance(form.peso.data, float) == False and form.origen.data != 'None':
-            error = "El peso debe ser un numérico decimal"
-            return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'), message = error)
-
+    
         return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'))
         # se retorna a la misma función el template grafo.html con la función render_template() que sobrepone el html sobre tarea1.html sin cambiar la ruta (Flask)
+
+
+    elif request.method == 'GET':
+        grafo.vectores.clear()
+        grafo.aristas.clear()
+        setattr(grafo,'vertices',0)
     
     return render_template("tarea1.html", grafo = grafo)
 

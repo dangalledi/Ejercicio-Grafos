@@ -52,7 +52,7 @@ def dijkstra(lista,origen,destino):
                         return operador(actual)
         else:
             return actual
-        camino.append(operador())
+        camino.append(operador(origen,acumulado,iteraciones))
         print(camino)
     return camino
 
