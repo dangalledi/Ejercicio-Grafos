@@ -17,21 +17,43 @@ def dijkstra(lista,origen,destino):
     iteraciones = 0
     
     actual = origen
-    while actual != destino:
-        adyacentes.clear()
-        for i in range(len(nodos1)):
-            if nodos1[i] == actual:
-                vecino = nodos2[i]
-                adyacentes.append((actual,vecino,acumulado+pesos[i]))
-                pesos_actuales = [p[2] in adyacentes for p in adyacentes]
-                peso_min = min(pesos_actuales)
+    def operador(actual,acumulado,iteraciones): 
+        if actual != destino:
+            adyacentes.clear()
+            for i in range(len(nodos1)):
+                print("XDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+                if nodos1[i] == actual:
+                    print("actual : ",actual)
+                    input()
+                    vecino = nodos2[i]
+                    print("Vecino : ",vecino)
+                    input()
+                    adyacentes.append((actual,vecino,acumulado+pesos[i]))
+                    pesos_actuales = [p[2] in adyacentes for p in adyacentes]
+                    print(pesos_actuales)
+                    input()
+                    peso_min = min(pesos_actuales)
+                    print("Peso mínimo: ",peso_min)
+                    input()
                 for sig in adyacentes:
+                    print("sig actual : ",sig)
+                    input()
                     if sig[2] == peso_min:
                         actual = sig[1]
+                        print("actual + 1: ",actual)
+                        input()
                         acumulado = acumulado + sig[2]
                         iteraciones = iteraciones + 1 
+                        print("iteraciones: ",iteraciones)
+                        input()
                         camino.append(sig[1])
-    print(camino)
+                        print("camino hasta ahora : ",camino)
+                        input()
+                        return operador(actual)
+        else:
+            return actual
+        camino.append(operador())
+        print(camino)
     return camino
 
     #print(filas)

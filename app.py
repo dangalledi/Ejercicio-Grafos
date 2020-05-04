@@ -133,7 +133,7 @@ def tarea1():
         
         if isinstance(form.peso.data, float) == False and form.origen.data != 'None':
             error = "El peso debe ser un numérico decimal"
-            return render_template("tarea1.html", grafo = grafo, message = error)
+            return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'), message = error)
 
         return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'))
         # se retorna a la misma función el template grafo.html con la función render_template() que sobrepone el html sobre tarea1.html sin cambiar la ruta (Flask)
