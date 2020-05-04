@@ -29,6 +29,11 @@ def tarea1():
     form = PostForm()           # 2do form realizar tareas con el grafo
     error = ''
     if request.method == 'POST':
+
+        if form.tarea.data == 'actualizar':
+            grafo.vectores.clear()
+            grafo.aristas.clear()
+            setattr(grafo,'vertices',0)
         
         grafo.nombre.data = grafo.nombre.data.replace(' ','')
         if  (grafo.nodos.data).isdigit() == True:           # if de si el ingreso son solo números implicitamente se deduce grafo no etiquetado
@@ -127,10 +132,11 @@ def tarea1():
                 #impresion del resultado en la pagina
                 return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'),resultado= Ar)
 
-        elif form.tarea.data == 'actualizar':
-            grafo.vectores.clear()
-            grafo.aristas.clear()
-            setattr(grafo,'vertices',0)
+        print("nombre del grafo:",grafo.nombre.data)            # print de consola ¡¡¡ AÑADIR CONDICIÓN DE NOMBRE NO NUMÉRICO !!!
+        print("eitquetado:",grafo.etiquetado.data)          # print de consola
+        print("tipo de grafo:",grafo.tipo.data)         # print de consola
+        print("nodos seleccionados para tarea (n°: origen, destino): ("+form.origen.data+", "+form.destino.data+")")         # print de consola
+        print("vectores $$$$$$$$$$$$$$$$$$$ = : ",getattr(grafo,"vectores"))
         
         if grafo.nodos.data == '' or grafo.nombre.data == '':
             error = "estos campos no pueden quedar vacíos :/"
