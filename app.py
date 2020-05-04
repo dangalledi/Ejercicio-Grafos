@@ -81,6 +81,9 @@ def tarea1():
             hamiltoniano = encontrar_camino_hamiltoniano( aristas )
             if (hamiltoniano):
                 print ('Camino Hamiltoniano: ', hamiltoniano) ## Retorna una lista 
+                mensaje = 'El camino es :',hamiltoniano ,'siendo un grafo hamiltoniano'
+                return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'),resultado= mensaje)
+                
 
         elif form.tarea.data == 'euleriano':
             aristas=getattr(grafo,'aristas') #Aristas tipo (int,int,float)
