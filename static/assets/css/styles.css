@@ -9,6 +9,7 @@ body {
 }
 
 #info {
+  font-family: 'Roboto';
   text-align: center;
   padding: 25px;
   background-image: url(../img/thor.jpg);
@@ -16,6 +17,7 @@ body {
   
 }
 #info2 {
+  font-family: 'Roboto';
   text-align: center;
   padding: 50px ;
   background-image: url(../img//background.jpg);
@@ -23,6 +25,7 @@ body {
 }
 
 #info .jumbotron, #info2 .jumbotron  {
+  font-family: 'Roboto';
   border-radius: 30px;
   padding: 50px ;
   background-color: rgba(255,255,255,0.0);
@@ -32,26 +35,32 @@ body {
 
 @media (min-width: 991px) {
   #info, #info2,#img {
+    font-family: 'Roboto';
     padding: 20px;
   }
   
 }
 @media (max-width: 320px) {
   #info .jumbotron, #info2 .jumbotron,#img{
+    font-family: 'Roboto';
     padding: 20px;
   }
 }
 
 #boton {
+  font-family: 'Roboto';
   padding: 5px;
   margin: 40px;
 }
 
-}
 #text-info {
+  font-family: 'Roboto';
   padding: 60px;
 }
 
+#textooo{
+  font-family: 'Roboto';
+}
 
 
 

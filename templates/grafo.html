@@ -3,16 +3,23 @@
 <div id="info2">
     <div class="jumbotron">
         <h1 class="display-5">Grafo</h1>
-        <p class="lead">Se generó un grafo de nombre "{{ nombre }}" del tipo {{ tipo }} de {{ nodos }} nodo(s).</p>
+        <p class="lead m-3" id="textooo">Se generó un grafo de nombre "{{ nombre }}" del tipo {{ tipo }} de {{ nodos }} nodo(s).</p>
         <img src="{{ url_for('grafica', nombre = nombre, tipo = tipo, nodos = nodos, etiquetas = etiquetas, etiquetado = etiquetado, vectores = vectores)}}" alt="Un grafo de tipo {{ tipo }} de {{ nodos }} nodos" height="500" class="center" />
         <br>
-        <p>Su expresión matemática es la siguiente: {{ nombre }} = ( { {{ etiquetas }} }, { {{ vectores }} })</p>
+        <h5 class="m-3" id="textooo">Su expresión matemática es la siguiente: {{ nombre }} = ( { {{ etiquetas }} }, { {{ vectores }} })</h5>
         <br> {% if resultado %}
         <div class="alert alert-primary" role="alert">
             El resultado es: {{ resultado }}
         </div>
         {% endif %}
         <div>
+        </div>
+    </div>
+</div>
+
+
+            <div id="info2">
+                <div class="jumbotron">
             <form method="POST" class="form-group w-50 mx-auto">
                 <p>
                     {{ grafo.tipo.label }} {{ grafo.tipo }}
@@ -41,4 +48,5 @@
             {% endif %}
         </div>
     </div>
+    
     {% endblock %}
