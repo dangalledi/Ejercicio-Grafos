@@ -207,19 +207,18 @@ def Conexo(s,M,n):
     for j in range(len(visitado)):
         total = total + visitado[j] #Si el total de visitados es igual a los nodos entonces es conexo
     if total == n: 
-        print("El grafo es conexo")
+        return True #Retorna un true si es Conexo
     else: 
-        print("El Grafo no es conexo")
+        return False #Retorna un false si NO es Conexo
 
-def Matriz(grafo,n):
-    ma = np.zeros((n,n))
-    for i in range(len(grafo)): 
+def Matriz(grafo,n): #Hace la matriz de adyacencia
+    ma = np.zeros((n,n)) #Hace una matriz de ceros 
+    for i in range(len(grafo)): #Los ceros se cambian por un 1 cuando se encuentra una arista entre los nodos 
         a=grafo[i][0]
         b=grafo[i][1]
         ma[a-1][b-1]=1
         ma[b-1][a-1]=1
-    print(ma)
-    Conexo(0,ma,n)
+    return ma #Retorna la matriz de adyacencia 
 
 def cant_nodos(g): #Saber la cantidad de nodos a partir de las aristas
     mayor=0
