@@ -74,6 +74,7 @@ def tarea1():
             result = g.algoritmo_FM(origen_nodo,destino_nodo)#ok
             print ("Flujo Maximo /////////////////////////////////////",result)#ok
             fix_grafo.clear()
+            return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'),resultado= result)
 #######################################################################################################################
 
         elif form.tarea.data == 'hamiltoniano':
