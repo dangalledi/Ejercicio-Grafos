@@ -82,7 +82,7 @@ def lista_de_grados_de_nodos(matriz,aristas):
 def encontrar_camino_hamiltoniano(aristas):
 
     nodos = nodos_de_aristas(aristas)
-    aristas = traductor(aristas)
+#    aristas = traductor(aristas)
     camino = []
     caminito =[]
     no_hay_caminito = []
@@ -139,31 +139,7 @@ def es_euleriano_interrogacion_xD (aristas):
     else:
         print('Es Euleriano :)')
         return True
-    return 0
-
-def es_euleriano_interrogacion_xD (aristas):
-
-    aristas = traductor(aristas)
-    nodos = nodos_de_aristas(aristas)
-    auxiliar= 0
-    auxiliargrado = 0
-    Matriz_Adyacencia = matriz_de_adyacencia(aristas)   
-    for i in lista_de_grados_de_nodos(Matriz_Adyacencia,aristas):         
-        if (i%2==0):
-            auxiliar = auxiliar +1
-        else:
-            auxiliargrado = auxiliargrado + 1
-
-    if(auxiliar != (len(nodos)) or encontrar_camino_euleriano == False):
-        print('No es Euleriano')
-        return False
-    elif (auxiliargrado%2 == 0 and (auxiliar == (len(nodos))-auxiliargrado)):
-        print ('Es Euleriano')
-        return True
-    else:
-        print('Es Euleriano :)')
-        return True
-    return 0
+    return True
 
 #Implementacion de Kruskal
 #Variables para Kruskal 
