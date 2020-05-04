@@ -18,7 +18,7 @@
 
             <form method="POST" class="form-group w-50 mx-auto">
                 <p>
-                    {{ grafo.tipo.label }} {{ grafo.tipo }}
+                    {{ grafo.tipo.label }} <br> {{ grafo.tipo }}
                 </p>
                 <p>
                     Nombre: {{ grafo.nombre(class="form-control form-control") }} {% for error in grafo.nombre.errors %}

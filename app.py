@@ -4,7 +4,7 @@ from config import Config
 from nwfixes import fix, fix2
 from FlujoMaximo import Graph,fix_arreglo,creacion_matriz
 from tarea1 import kruskal, Matriz, encontrar_camino_euleriano ,encontrar_camino_hamiltoniano ,es_euleriano_interrogacion_xD, cant_nodos, Conexo
-from dijkstra import dijkstra
+#from dijkstra import dijkstra
 
 #Librerias para los grafos
 import matplotlib
@@ -36,8 +36,6 @@ def tarea1():
             form.origen.choices = [(i,str(i)) for i in range(int(grafo.nodos.data))]          # se ingresan las opciones dinámicas al atributo origen
             form.destino.choices = [(i,str(i)) for i in range(int(grafo.nodos.data))]         # se ingresan las opciones dinámicas al atributo destino
             setattr(grafo,'vertices',int(grafo.nodos.data))         # como la data es string se tiene que convertir a entero y obtener la cantidad de nodos/vertices 
-            
-            print("cantidad de vertices del grafo:",getattr(grafo,'vertices'))          # print de consola
         
         else:
             grafo.nodos.data = grafo.nodos.data.replace(' ','')
@@ -46,11 +44,8 @@ def tarea1():
             form.origen.choices = [(i,str(i)+": "+etiquetas[i]) for i in range(len(etiquetas))]         # la otra manera si es un nodo etiquetado
             form.destino.choices = [(i,str(i)+": "+etiquetas[i]) for i in range(len(etiquetas))]        # la otra manera si es un nodo etiquetado
             setattr(grafo,'vertices',len(etiquetas))            # se le asigna al atributo vertices del grafo el largo de la lista
-
-            print("nodos etiquetados:",etiquetas)           # print de consola
-            print("cantidad de vertices del grafo:",getattr(grafo,'vertices'))          # print de consola
         
-        if isinstance(form.peso.data, float) == False  and form.tarea.data == 'agregar':
+        if isinstance(form.peso.data, float) == False  and (form.tarea.data == 'agregar' or form.tarea.data == 'corto' or form.tarea.data == 'corto'):
             error = "El peso debe ser un numérico decimal"
             return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'), message = error)
 
@@ -59,35 +54,32 @@ def tarea1():
             grafo.aristas.append((int(form.origen.data),int(form.destino.data),form.peso.data))            # si el primer caracter del string es dígito lo agrega como vector a aristas
             # al estar vacío el atributo aristas, la 1era vez toma la N de None y no se pueden repetir
         
-        elif form.tarea.data == 'corto':
-            print("El camino más corto es: ",dijkstra(getattr(grafo,'aristas'),int(form.origen.data),int(form.destino.data)))
+        #elif form.tarea.data == 'corto':
+            #print("El camino más corto es: ",dijkstra(getattr(grafo,'aristas'),int(form.origen.data),int(form.destino.data)))
 
         elif form.tarea.data == 'flujo':
-            cantidad_nodos = getattr(grafo,'vertices') #cantidad de nodos !!!
-            matriz_tal_por_cual = getattr(grafo,'aristas')  #[nodo,nodo,peso] !!!
+            cantidad_nodos = getattr(grafo,'vertices')
+            matriz_tal_por_cual = getattr(grafo,'aristas')
             print(cantidad_nodos)
             print(matriz_tal_por_cual)
-            origen_nodo = int(form.origen.data)#ok
-            destino_nodo = int(form.destino.data) #ok
+            origen_nodo = int(form.origen.data)
+            destino_nodo = int(form.destino.data)
             print(origen_nodo,destino_nodo)
-            fix_grafo = fix_arreglo(cantidad_nodos,matriz_tal_por_cual)#ok
-            print(fix_grafo)#ok
-            g = Graph(fix_grafo)#ok
-            result = g.algoritmo_FM(origen_nodo,destino_nodo)#ok
-            print ("Flujo Maximo /////////////////////////////////////",result)#ok
+            fix_grafo = fix_arreglo(cantidad_nodos,matriz_tal_por_cual)
+            print(fix_grafo)
+            g = Graph(fix_grafo)
+            result = g.algoritmo_FM(origen_nodo,destino_nodo)
             fix_grafo.clear()
             return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'),resultado= result)
-#######################################################################################################################
 
         elif form.tarea.data == 'hamiltoniano':
             aristas=getattr(grafo,'aristas') #Aristas tipo (int,int,float)
             hamiltoniano = encontrar_camino_hamiltoniano( aristas )
             if (hamiltoniano):
-                print ('Camino Hamiltoniano: ', hamiltoniano) ## Retorna una lista 
+                print ('Camino Hamiltoniano: ', hamiltoniano) # Retorna una lista 
                 mensaje = 'El camino es :',hamiltoniano ,'siendo un grafo hamiltoniano'
                 return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'),resultado= mensaje)
                 
-
         elif form.tarea.data == 'euleriano':
             aristas=getattr(grafo,'aristas') #Aristas tipo (int,int,float)
             euleriano = es_euleriano_interrogacion_xD( aristas )
@@ -110,9 +102,7 @@ def tarea1():
                 mensaje = 'La matriz de adyacencia es: ',M ,'El grafo NO es Conexo'
             return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'),resultado= mensaje)
 
-
         elif form.tarea.data == 'arbol': 
-
             #Si lo que entra es el numero de nodos
             if(grafo.nodos.data).isdigit() == True:
                 Vertices = []
@@ -141,12 +131,6 @@ def tarea1():
             grafo.vectores.clear()
             grafo.aristas.clear()
             setattr(grafo,'vertices',0)
-
-        print("nombre del grafo:",grafo.nombre.data)            # print de consola ¡¡¡ AÑADIR CONDICIÓN DE NOMBRE NO NUMÉRICO !!!
-        print("eitquetado:",grafo.etiquetado.data)          # print de consola
-        print("tipo de grafo:",grafo.tipo.data)         # print de consola
-        print("nodos seleccionados para tarea (n°: origen, destino): ("+form.origen.data+", "+form.destino.data+")")         # print de consola
-        print("vectores $$$$$$$$$$$$$$$$$$$ = : ",getattr(grafo,"vectores"))
         
         if grafo.nodos.data == '' or grafo.nombre.data == '':
             error = "estos campos no pueden quedar vacíos :/"
@@ -154,7 +138,6 @@ def tarea1():
     
         return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'))
         # se retorna a la misma función el template grafo.html con la función render_template() que sobrepone el html sobre tarea1.html sin cambiar la ruta (Flask)
-
 
     elif request.method == 'GET':
         grafo.vectores.clear()
@@ -173,7 +156,6 @@ def grafica(nodos,tipo,nombre,etiquetas,etiquetado,vectores):
     if etiquetado == True:
         labels = etiquetas.split(',')
         dic_etiquetas = { i : labels[i] for i in range(len(labels))}
-        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",dic_etiquetas.items())            # print de consola
         G.add_nodes_from(labels)
     else:
         for i in range(nodos):
@@ -187,8 +169,6 @@ def grafica(nodos,tipo,nombre,etiquetas,etiquetado,vectores):
         j = fix2(vectores)
         G.add_edges_from(j)
 
-
-    #print(G.nodes())            # print de consola
     nx.draw_planar(G,with_labels=True)
     img = BytesIO()         # se le asigna memoria a la imagen
     plt.savefig(img)            # se guarda la imagen del stream al objeto plt que creará la imagen
