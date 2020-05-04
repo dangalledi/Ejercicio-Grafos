@@ -3,7 +3,7 @@ from forms import ClaseGrafo, PostForm
 from config import Config
 from nwfixes import fix, fix2
 from FlujoMaximo import Graph,fix_arreglo,creacion_matriz
-from tarea1 import kruskal, Matriz, encontrar_camino_euleriano ,encontrar_camino_hamiltoniano ,es_euleriano_interrogacion_xD, cant_nodos
+from tarea1 import kruskal, Matriz, encontrar_camino_euleriano ,encontrar_camino_hamiltoniano ,es_euleriano_interrogacion_xD, cant_nodos, Conexo
 from dijkstra import dijkstra
 
 #Librerias para los grafos
@@ -107,7 +107,14 @@ def tarea1():
         elif (form.tarea.data == 'conexo'): #Funcion si es conexo o no conexo
             G=getattr(grafo,'aristas') #Aristas tipo (int,int,float)
             N=cant_nodos(G)+1 #Cantidad de nodos
-            Matriz(G, N)  #Implementacion conexo
+            M=Matriz(G, N)  #Matriz de adyacencia
+            Bol = Conexo(0,M,N) #Recibe un Booleano 
+            if(Bol == True): #El grafo es Conexo
+                mensaje = 'La matriz de adyacencia es: ',M ,'El grafo es Conexo'
+            else: #El Grafo no es Conexo
+                mensaje = 'La matriz de adyacencia es: ',M ,'El grafo NO es Conexo'
+            return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'),resultado= mensaje)
+
 
         elif form.tarea.data == 'arbol': 
 
