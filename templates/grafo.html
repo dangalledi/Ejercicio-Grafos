@@ -1,6 +1,6 @@
 {% extends "layout.html" %} {% block content %}
 
-<div id="info2">
+<div id="info">
     <div class="jumbotron">
         <h1 class="display-5">Grafo</h1>
         <p class="lead m-3" id="textooo">Se generó un grafo de nombre "{{ nombre }}" del tipo {{ tipo }} de {{ nodos }} nodo(s).</p>
@@ -14,12 +14,8 @@
         {% endif %}
         <div>
         </div>
-    </div>
-</div>
+ 
 
-
-            <div id="info2">
-                <div class="jumbotron">
             <form method="POST" class="form-group w-50 mx-auto">
                 <p>
                     {{ grafo.tipo.label }} {{ grafo.tipo }}
@@ -48,5 +44,6 @@
             {% endif %}
         </div>
     </div>
-    
+    </div>
+</div>
     {% endblock %}
