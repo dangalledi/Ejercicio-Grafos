@@ -102,7 +102,7 @@ def tarea1():
         elif (form.tarea.data == 'conexo'): #Funcion si es conexo o no conexo
             G=getattr(grafo,'aristas') #Aristas tipo (int,int,float)
             N=cant_nodos(G)+1 #Cantidad de nodos
-            M=Matriz(G, N)  #Implementacion conexo
+            M=Matriz(G, N)  #Matriz de adyacencia
             Bol = Conexo(0,M,N) #Recibe un Booleano 
             if(Bol == True): #El grafo es Conexo
                 mensaje = 'La matriz de adyacencia es: ',M ,'El grafo es Conexo'

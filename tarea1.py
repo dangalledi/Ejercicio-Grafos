@@ -226,4 +226,4 @@ def cant_nodos(g): #Saber la cantidad de nodos a partir de las aristas
         for j in range(2):
             if(g[i][j] > mayor):
                 mayor = g[i][j]
-    return mayor
+    return mayor #Retorna el numero de nodos
