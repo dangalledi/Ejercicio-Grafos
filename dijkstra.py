@@ -30,7 +30,7 @@ def dijkstra(lista,origen,destino):
                         actual = sig[1]
                         acumulado = acumulado + sig[2]
                         iteraciones = iteraciones + 1 
-                        camino.append((sig[0],sig[1],sig[2]))
+                        camino.append(sig[1])
     print(camino)
     return camino
 

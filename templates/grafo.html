@@ -11,11 +11,7 @@
         <div>
             <form  method = "POST" class="form-group w-50 mx-auto">
                 <p>
-                    <label for ='tipo'>Tipo de grafo: </label>
-                    <select id = 'tipo' name = 'tipo' id= 'tipo' class="form-control form-control">
-                        <option value = "simple">Simple</option>
-                        <option value = "direccionado">Direccionado</option>
-                    </select>
+                    {{ grafo.tipo.label }}  {{ grafo.tipo }}
                 </p>
                 <p>
                     Nombre: {{ grafo.nombre(class="form-control form-control") }} {% for error in grafo.nombre.errors %}
