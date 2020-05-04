@@ -1,14 +1,8 @@
 {% extends "layout.html" %} {% block content %}
-
-<div id="info">
-    <div class="jumbotron">
-        <h1><strong>BIENVENIDO</strong></h1>
-        <p id="text-info">Con esta pagina web seras capaz de generar imagenes de distintos tipos de grafos, encontrar el camino mas corto entre dos vertices y ademas conocer la categoria a la cual pertenece.</p>
-    </div>
-</div>
-
 <div id="info2">
     <div class="jumbotron">
+        <h1><strong>BIENVENIDO</h1>
+        <p id="text-info">esta pagina web seras capaz de generar imagenes de distintos tipos de grafos, encontrar el camino mas corto entre dos vertices y ademas conocer la categoria a la cual pertenece.</p>
         <form action=" " method="POST" novalidate>
             <p class="lead">Ingresa los datos solicitados para dibujar el grafo</p>
             <p>
@@ -30,7 +24,7 @@
                     <p>Estimado usuario: {{ message }}</p>
                     <hr>
                     
-                </div>
+                </div></strong>
         {% endif %}
     </div>
 </div>

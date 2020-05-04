@@ -24,13 +24,25 @@ body {
   background-size: cover;
 }
 
-#info .jumbotron, #info2 .jumbotron  {
+#info .jumbotron{
+  font-family: 'Roboto' sans-serif;
+  border-radius: 30px;
+  padding: 50px ;
+  background-color: rgba(255,255,255,0.0);
+  max-width: 800px;
+  margin: auto;
+  color:white;
+}
+
+
+#info2 .jumbotron  {
   font-family: 'Roboto';
   border-radius: 30px;
   padding: 50px ;
   background-color: rgba(255,255,255,0.0);
   max-width: 800px;
   margin: auto;
+  color: black;
 }
 
 @media (min-width: 991px) {
@@ -54,8 +66,10 @@ body {
 }
 
 #text-info {
-  font-family: 'Roboto';
+  font-size: large;
+  font-family: lato;
   padding: 60px;
+  margin: auto;
 }
 
 #textooo{
