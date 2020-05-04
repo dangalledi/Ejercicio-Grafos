@@ -103,25 +103,30 @@ def tarea1():
             Matriz(G, N)  #Implementacion conexo
 
         elif form.tarea.data == 'arbol': 
-            #Si lo que entra es una lista de etiquetas
+
+            #Si lo que entra es el numero de nodos
             if(grafo.nodos.data).isdigit() == True:
-                #AristasNuevas = getattr(grafo,'vertices')
                 Vertices = []
                 for i in range (int(grafo.nodos.data)):
                     Vertices.append(i)
 
                 Ar=kruskal(Vertices,getattr(grafo,'aristas'))
+                #Print de consola
+                print ("El resultado de la MTS:",Ar) 
+                #impresion del resultado en la pagina
+                return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'),resultado= Ar)
 
-                print ("El resultado de la MTS:",Ar)
-
-        #Si lo que entra es el numero de vertices
+            #Si lo que entra es una lista de etiquetas
             else:
                 AristasNuevas = grafo.nodos.data 
                 Vertices = []
                 for i in range (len(AristasNuevas)):
                     Vertices.append(i)
                 Ar=kruskal(Vertices,getattr(grafo,'aristas'))
+                #Print de consola
                 print ("El resultado de la MTS:",Ar)
+                #impresion del resultado en la pagina
+                return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'),resultado= Ar)
 
         elif form.tarea.data == 'actualizar':
             grafo.vectores.clear()
