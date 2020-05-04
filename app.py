@@ -47,15 +47,14 @@ def tarea1():
             print("nodos etiquetados:",etiquetas)           # print de consola
             print("cantidad de vertices del grafo:",getattr(grafo,'vertices'))          # print de consola
 
-
         if  form.tarea.data == 'agregar' and form.destino.data[0].isdigit() == True and ((int(form.origen.data),int(form.destino.data),float(form.peso.data))) not in getattr(grafo,'aristas'):
             grafo.vectores.append((int(form.origen.data),int(form.destino.data)))
             grafo.aristas.append((int(form.origen.data),int(form.destino.data),float(form.peso.data)))            # si el primer caracter del string es dígito lo agrega como vector a aristas
             # al estar vacío el atributo aristas, la 1era vez toma la N de None y no se pueden repetir
         
         elif form.tarea.data == 'corto':
-            print("¡¡¡   IMPLEMENTAR ALGORITMO DE DJISKTRA   !!!")            # ¡¡¡IMPLEMENTAR ALGORITMO DE DJISKTRA!!!
-#######################################################################################################################       
+            print("El camino más corto es: ",dijkstra(getattr(grafo,'aristas'),int(form.origen.data),int(form.destino.data)))
+
         elif form.tarea.data == 'flujo':
             cantidad_nodos = getattr(grafo,'vertices') #cantidad de nodos !!!
             matriz_tal_por_cual = getattr(grafo,'aristas')  #[nodo,nodo,peso] !!!
