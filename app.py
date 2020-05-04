@@ -15,6 +15,7 @@ import networkx as nx
 
 app = Flask(__name__)
 app.config.from_object(Config)
+error = ''
 
 # Ruta home 
 @app.route('/')   
@@ -26,7 +27,11 @@ def home():
 def tarea1():
     grafo = ClaseGrafo()            # cada vez que ingresa a la función de la ruta se crea el objeto grafo con los inputs
     form = PostForm()           # 2do form realizar tareas con el grafo
+    error = ''
     if request.method == 'POST':
+        
+        
+        
         grafo.nombre.data = grafo.nombre.data.replace(' ','')
         if  (grafo.nodos.data).isdigit() == True:           # if de si el ingreso son solo números implicitamente se deduce grafo no etiquetado
             grafo.etiquetado.data = False           # atributo booleano etiquetado del grafo se hace falso
@@ -122,6 +127,14 @@ def tarea1():
         print("nodos seleccionados para tarea (n°: origen, destino): ("+form.origen.data+", "+form.destino.data+")")         # print de consola
         print("vectores $$$$$$$$$$$$$$$$$$$ = : ",getattr(grafo,"vectores"))
         
+        if grafo.nodos.data == '' or grafo.nombre.data == '':
+            error = "estos campos no pueden quedar vacíos :/"
+            return render_template("tarea1.html", grafo = grafo, message = error)
+        
+        if isinstance(form.peso.data, float) == False and form.origen.data != 'None':
+            error = "El peso debe ser un numérico decimal"
+            return render_template("tarea1.html", grafo = grafo, message = error)
+
         return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'))
         # se retorna a la misma función el template grafo.html con la función render_template() que sobrepone el html sobre tarea1.html sin cambiar la ruta (Flask)
     

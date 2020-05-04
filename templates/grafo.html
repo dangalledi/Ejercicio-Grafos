@@ -35,11 +35,14 @@
                     {{ form.submit(class="btn btn-primary m-3")}}
                 </p>  
             </form>
-
-
+            {% if message %}
+                <div class="alert alert-danger" role="alert">
+                    <p>Estimado usuario: {{ message }}</p>
+                    <hr>
+                    
+                </div>
+            {% endif %}
         </div>
-        
-    </div>
     </div>
 {% endblock %}
 
