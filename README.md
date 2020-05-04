@@ -13,7 +13,7 @@ pip install -r requirements.txt
 
 ## Ejecución con el servidor
 
-Y luego ejecute index.py
+Y luego ejecute app.py
 
 ```bash
 python app.py
