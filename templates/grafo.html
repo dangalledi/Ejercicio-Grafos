@@ -1,48 +1,44 @@
 {% extends "layout.html" %} {% block content %}
 
-    <div id="info2">
-        <div class="jumbotron">
+<div id="info2">
+    <div class="jumbotron">
         <h1 class="display-5">Grafo</h1>
-        <p class="lead">Se generó un grafo de nombre "{{ nombre }}" del tipo {{ tipo }} de {{ nodos }} nodo(s).</p> 
-        <img src="{{ url_for('grafica', nombre = nombre, tipo = tipo, nodos = nodos, etiquetas = etiquetas, etiquetado = etiquetado, vectores = vectores)}}" alt="Un grafo de tipo {{ tipo }} de {{ nodos }} nodos" height="500" class = "center"/>
+        <p class="lead">Se generó un grafo de nombre "{{ nombre }}" del tipo {{ tipo }} de {{ nodos }} nodo(s).</p>
+        <img src="{{ url_for('grafica', nombre = nombre, tipo = tipo, nodos = nodos, etiquetas = etiquetas, etiquetado = etiquetado, vectores = vectores)}}" alt="Un grafo de tipo {{ tipo }} de {{ nodos }} nodos" height="500" class="center" />
         <br>
         <p>Su expresión matemática es la siguiente: {{ nombre }} = ( { {{ etiquetas }} }, { {{ vectores }} })</p>
-        <br>
+        <br> {% if resultado %}
+        <div class="alert alert-primary" role="alert">
+            El resultado es: {{ resultado }}
+        </div>
+        {% endif %}
         <div>
-            <form  method = "POST" class="form-group w-50 mx-auto">
+            <form method="POST" class="form-group w-50 mx-auto">
                 <p>
-                    {{ grafo.tipo.label }}  {{ grafo.tipo }}
+                    {{ grafo.tipo.label }} {{ grafo.tipo }}
                 </p>
                 <p>
                     Nombre: {{ grafo.nombre(class="form-control form-control") }} {% for error in grafo.nombre.errors %}
                     <span style="color: red;">[{{ error }}]</span> {% endfor %}
                 </p>
-                    Vertices:{{ grafo.nodos(class="form-control form-control") }} {% for error in grafo.nodos.errors %}
-                    
-                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
+                Vertices:{{ grafo.nodos(class="form-control form-control") }} {% for error in grafo.nodos.errors %}
+
+                <span style="color: red;">[{{ error }}]</span> {% endfor %}
                 </p>
 
                 <p>
-                    {{ form.origen.label }} {{ form.origen(class="form-control form-control") }}
-                    
-                    {{ form.destino.label }} {{ form.destino(class="form-control form-control") }} 
-                    
-                    {{ form.tarea.label }} {{ form.tarea(class="form-control form-control") }}
-    
-                    {{ form.peso.label }}  {{ form.peso(class="form-control form-control") }} {% for error in form.peso.errors %}
-                    <span style="color: red;">[{{ error }}]</span> {% endfor %}
-                    
-                    {{ form.submit(class="btn btn-primary m-3")}}
-                </p>  
+                    {{ form.origen.label }} {{ form.origen(class="form-control form-control") }} {{ form.destino.label }} {{ form.destino(class="form-control form-control") }} {{ form.tarea.label }} {{ form.tarea(class="form-control form-control") }} {{ form.peso.label }}
+                    {{ form.peso(class="form-control form-control") }} {% for error in form.peso.errors %}
+                    <span style="color: red;">[{{ error }}]</span> {% endfor %} {{ form.submit(class="btn btn-primary m-3")}}
+                </p>
             </form>
             {% if message %}
-                <div class="alert alert-danger" role="alert">
-                    <p>Estimado usuario: {{ message }}</p>
-                    <hr>
-                    
-                </div>
+            <div class="alert alert-danger" role="alert">
+                <p>Estimado usuario: {{ message }}</p>
+                <hr>
+
+            </div>
             {% endif %}
         </div>
     </div>
-{% endblock %}
-
+    {% endblock %}

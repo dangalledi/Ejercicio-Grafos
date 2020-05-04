@@ -89,6 +89,9 @@ def tarea1():
                 camino = encontrar_camino_euleriano(aristas)
                 print ('Grafo euleriano: ', euleriano)
                 print ('Camino euleriano: ', camino)
+                mensaje = 'El camino es :',camino ,'siendo un grafo euleriano'
+                return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'),resultado= mensaje)
+                # se retorna a la misma función el template grafo.html con la función render_template() que sobrepone el html sobre tarea1.html sin cambiar la ruta (Flask)
 
         elif (form.tarea.data == 'conexo'): #Funcion si es conexo o no conexo
             G=getattr(grafo,'aristas') #Aristas tipo (int,int,float)
