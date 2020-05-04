@@ -1,69 +1,59 @@
-#import numpy as np
+import sys
 
+# Function to find out which of the unvisited node 
+# needs to be visited next
+def avisitar():
+  global visitado_distancia
+  v = -10
+  # Choosing the vertex with the minimum distance
+  for index in range(number_of_vertices):
+    if visitado_distancia[index][0] == 0 \
+      and (v < 0 or visitado_distancia[index][1] <= \
+      visitado_distancia[v][1]):
+        v = index
+  return v
 
-lista = [(0,1,3), (0,2,2), (2,3,5), (2,4,3), (3,5,2), (3,6,1)]
-origen = 0
-destino = 5
-nodos = 7
+# Creating the graph as an adjacency matrix
+vertices = [[0, 1, 1, 0],
+            [0, 0, 1, 0],
+            [0, 0, 0, 1],
+            [0, 0, 0, 0]]
+edges =  [[0, 3, 4, 0],
+          [0, 0, 0.5, 0],
+          [0, 0, 0, 1],
+          [0, 0, 0, 0]]
 
-def dijkstra(lista,origen,destino):
-    
-    nodos1 = [x[0] for x in lista]
-    nodos2 = [y[1] for y in lista]
-    pesos = [z[2] for z in lista]
-    adyacentes = []
-    camino = []
-    acumulado = 0
-    iteraciones = 0
-    
-    actual = origen
-    def operador(actual,acumulado,iteraciones): 
-        if actual != destino:
-            adyacentes.clear()
-            for i in range(len(nodos1)):
-                print("XDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
-                if nodos1[i] == actual:
-                    print("actual : ",actual)
-                    input()
-                    vecino = nodos2[i]
-                    print("Vecino : ",vecino)
-                    input()
-                    adyacentes.append((actual,vecino,acumulado+pesos[i]))
-                    pesos_actuales = [p[2] in adyacentes for p in adyacentes]
-                    print(pesos_actuales)
-                    input()
-                    peso_min = min(pesos_actuales)
-                    print("Peso mínimo: ",peso_min)
-                    input()
-                for sig in adyacentes:
-                    print("sig actual : ",sig)
-                    input()
-                    if sig[2] == peso_min:
-                        actual = sig[1]
-                        print("actual + 1: ",actual)
-                        input()
-                        acumulado = acumulado + sig[2]
-                        iteraciones = iteraciones + 1 
-                        print("iteraciones: ",iteraciones)
-                        input()
-                        camino.append(sig[1])
-                        print("camino hasta ahora : ",camino)
-                        input()
-                        return operador(actual)
-        else:
-            return actual
-        camino.append(operador(origen,acumulado,iteraciones))
-        print(camino)
-    return camino
+number_of_vertices = len(vertices[0])
 
-    #print(filas)
-    #print(columnas)
-    #for i in columnas:
-        #for j in filas:
-                #adyacente[i][j] = 1
-    #for i in range(len(columnas)):
-        #for j in range(len(filas)):
-            
-    #print(adyacente[i][j])
+# The first element of the lists inside visited_and_distance 
+# denotes if the vertex has been visited.
+# The second element of the lists inside the visited_and_distance 
+# denotes the distance from the source.
+visitado_distancia = [[0, 0]]
+for i in range(number_of_vertices-1):
+  visitado_distancia.append([0, sys.maxsize])
 
-#dijkstra(lista,origen,destino)
+for vertex in range(number_of_vertices):
+  # Finding the next vertex to be visited.
+  visitar = avisitar()
+  for index_vecino in range(number_of_vertices):
+    # Calculating the new distance for all unvisited neighbours
+    # of the chosen vertex.
+    if vertices[visitar][index_vecino] == 1 and \
+     visitado_distancia[index_vecino][0] == 0:
+      new_distance = visitado_distancia[visitar][1] \
+      + edges[visitar][index_vecino]
+      # Updating the distance of the neighbor if its current distance
+      # is greater than the distance that has just been calculated
+      if visitado_distancia[index_vecino][1] > new_distance:
+        visitado_distancia[index_vecino][1] = new_distance
+    # Visiting the vertex found earlier
+    visitado_distancia[visitar][0] = 1
+
+i = 0 
+
+# Printing out the shortest distance from the source to each vertex       
+for distance in visitado_distancia:
+  print("The shortest distance of ",chr(ord('a') + i),\
+  " from the source vertex a is:",distance[1])
+  i = i + 1
