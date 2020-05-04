@@ -117,6 +117,54 @@ def encontrar_camino_hamiltoniano(aristas):
         
     return caminito
 
+def es_euleriano_interrogacion_xD (aristas):
+
+    aristas = traductor(aristas)
+    nodos = nodos_de_aristas(aristas)
+    auxiliar= 0
+    auxiliargrado = 0
+    Matriz_Adyacencia = matriz_de_adyacencia(aristas)   
+    for i in lista_de_grados_de_nodos(Matriz_Adyacencia,aristas):         
+        if (i%2==0):
+            auxiliar = auxiliar +1
+        else:
+            auxiliargrado = auxiliargrado + 1
+
+    if(auxiliar != (len(nodos)) or encontrar_camino_euleriano == False):
+        print('No es Euleriano')
+        return False
+    elif (auxiliargrado%2 == 0 and (auxiliar == (len(nodos))-auxiliargrado)):
+        print ('Es Euleriano')
+        return True
+    else:
+        print('Es Euleriano :)')
+        return True
+    return 0
+
+def es_euleriano_interrogacion_xD (aristas):
+
+    aristas = traductor(aristas)
+    nodos = nodos_de_aristas(aristas)
+    auxiliar= 0
+    auxiliargrado = 0
+    Matriz_Adyacencia = matriz_de_adyacencia(aristas)   
+    for i in lista_de_grados_de_nodos(Matriz_Adyacencia,aristas):         
+        if (i%2==0):
+            auxiliar = auxiliar +1
+        else:
+            auxiliargrado = auxiliargrado + 1
+
+    if(auxiliar != (len(nodos)) or encontrar_camino_euleriano == False):
+        print('No es Euleriano')
+        return False
+    elif (auxiliargrado%2 == 0 and (auxiliar == (len(nodos))-auxiliargrado)):
+        print ('Es Euleriano')
+        return True
+    else:
+        print('Es Euleriano :)')
+        return True
+    return 0
+
 #Implementacion de Kruskal
 #Variables para Kruskal 
 base = dict()
@@ -145,54 +193,27 @@ def union(u, v):
             base[v1] = v2
             if ord[v1] == ord[v2]: 
                 ord[v2] += 1
-    
-
-def es_euleriano_interrogacion_xD (aristas):
-
-    aristas = traductor(aristas)
-    nodos = nodos_de_aristas(aristas)
-    auxiliar= 0
-    auxiliargrado = 0
-    Matriz_Adyacencia = matriz_de_adyacencia(aristas)   
-    for i in lista_de_grados_de_nodos(Matriz_Adyacencia,aristas):         
-        if (i%2==0):
-            auxiliar = auxiliar +1
-        else:
-            auxiliargrado = auxiliargrado + 1
-
-    if(auxiliar != (len(nodos)) or encontrar_camino_euleriano == False):
-        print('No es Euleriano')
-        return False
-    elif (auxiliargrado%2 == 0 and (auxiliar == (len(nodos))-auxiliargrado)):
-        print ('Es Euleriano')
-        return True
-    else:
-        print('Es Euleriano :)')
-        return True
-    return 0
 
     # Función principal del algoritmo Kruskal
-def kruskal(graph):
-    mst = set() #convierte a mst en un conjunto vacío
-    # Para todo vértice v en G.V
-    for v in graph['vertices']:
+def kruskal(Ver,Ar):
+    mst = set() # mst = {conjunto vacío}
+    # Para todo vértice v en G.Ver
+    for v in Ver:
         generar_conjuntos(v)
-    # Ordena la lista G.A en forma no decendente por su peso w
-    # En este caso usamos el ordenador dentro de python
-    Aristas = list(graph['Aristas']) #lo convierte nuevamente a lista para poder usar sort()
+    # Ordena la lista G.A en forma no decendente por su peso 
+    # En este caso usamos el ordenador sort()
+    Aristas = Ar 
     Aristas.sort(key=itemgetter(2))
     print ("Aristas ordenadas:")
     print (Aristas)
-
-    # Para toda arista(u,v) en G.A
+    # Para toda arista(u,v) en G.Ar
     for e in Aristas:
         (u,v,peso)  = e
         if Buscar(u) != Buscar(v):
-            # A = A union (u,v)
             union(u, v)
-            # Union(u,v)
-            mst.add(e) #se adhieren al conjunto msd el elemento e=(u,v,peso) generado
+            mst.add(e) #Se rellena el conjunto vacio para generar el mst con e
     return mst 
+
 
 def Conexo(s,M,n):
     visitado=np.zeros(n) #arreglo de ceros, cambia a 1 si es visitado

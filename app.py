@@ -3,8 +3,6 @@ from forms import ClaseGrafo, PostForm
 from config import Config
 from nwfixes import fix, fix2
 from FlujoMaximo import Graph,fix_arreglo,creacion_matriz
-from networkx.classes import graph #???????
-from networkx.algorithms.tree import mst #???????
 from tarea1 import kruskal, Matriz, encontrar_camino_euleriano ,encontrar_camino_hamiltoniano ,es_euleriano_interrogacion_xD, cant_nodos
 from dijkstra import dijkstra
 
@@ -100,13 +98,10 @@ def tarea1():
                 Vertices = []
                 for i in range (int(grafo.nodos.data)):
                     Vertices.append(i)
-                graph={
-                'vertices': Vertices
-                ,
-                'Aristas': set(getattr(grafo,'aristas') )
-                }    
-                k=kruskal(graph)
-                print ("El resultado de la MTS:",k)
+
+                Ar=kruskal(Vertices,getattr(grafo,'aristas'))
+
+                print ("El resultado de la MTS:",Ar)
 
         #Si lo que entra es el numero de vertices
             else:
@@ -114,13 +109,8 @@ def tarea1():
                 Vertices = []
                 for i in range (len(AristasNuevas)):
                     Vertices.append(i)
-                graph={
-                'vertices': Vertices
-                ,
-                'Aristas': set(getattr(grafo,'aristas') )
-                }    
-                k=kruskal(graph)
-                print ("El resultado de la MTS:",k)
+                Ar=kruskal(Vertices,getattr(grafo,'aristas'))
+                print ("El resultado de la MTS:",Ar)
 
         elif form.tarea.data == 'actualizar':
             grafo.vectores.clear()
