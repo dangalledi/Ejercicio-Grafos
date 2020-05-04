@@ -76,6 +76,7 @@ def tarea1():
             result = g.algoritmo_FM(origen_nodo,destino_nodo)#ok
             print ("Flujo Maximo /////////////////////////////////////",result)#ok
             fix_grafo.clear()
+            return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'),resultado= result)
 #######################################################################################################################
 
         elif form.tarea.data == 'hamiltoniano':
@@ -83,6 +84,9 @@ def tarea1():
             hamiltoniano = encontrar_camino_hamiltoniano( aristas )
             if (hamiltoniano):
                 print ('Camino Hamiltoniano: ', hamiltoniano) ## Retorna una lista 
+                mensaje = 'El camino es :',hamiltoniano ,'siendo un grafo hamiltoniano'
+                return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'),resultado= mensaje)
+                
 
         elif form.tarea.data == 'euleriano':
             aristas=getattr(grafo,'aristas') #Aristas tipo (int,int,float)
@@ -91,6 +95,9 @@ def tarea1():
                 camino = encontrar_camino_euleriano(aristas)
                 print ('Grafo euleriano: ', euleriano)
                 print ('Camino euleriano: ', camino)
+                mensaje = 'El camino es :',camino ,'siendo un grafo euleriano'
+                return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'),resultado= mensaje)
+                # se retorna a la misma función el template grafo.html con la función render_template() que sobrepone el html sobre tarea1.html sin cambiar la ruta (Flask)
 
         elif (form.tarea.data == 'conexo'): #Funcion si es conexo o no conexo
             G=getattr(grafo,'aristas') #Aristas tipo (int,int,float)
@@ -98,25 +105,30 @@ def tarea1():
             Matriz(G, N)  #Implementacion conexo
 
         elif form.tarea.data == 'arbol': 
-            #Si lo que entra es una lista de etiquetas
+
+            #Si lo que entra es el numero de nodos
             if(grafo.nodos.data).isdigit() == True:
-                #AristasNuevas = getattr(grafo,'vertices')
                 Vertices = []
                 for i in range (int(grafo.nodos.data)):
                     Vertices.append(i)
 
                 Ar=kruskal(Vertices,getattr(grafo,'aristas'))
+                #Print de consola
+                print ("El resultado de la MTS:",Ar) 
+                #impresion del resultado en la pagina
+                return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'),resultado= Ar)
 
-                print ("El resultado de la MTS:",Ar)
-
-        #Si lo que entra es el numero de vertices
+            #Si lo que entra es una lista de etiquetas
             else:
                 AristasNuevas = grafo.nodos.data 
                 Vertices = []
                 for i in range (len(AristasNuevas)):
                     Vertices.append(i)
                 Ar=kruskal(Vertices,getattr(grafo,'aristas'))
+                #Print de consola
                 print ("El resultado de la MTS:",Ar)
+                #impresion del resultado en la pagina
+                return render_template("grafo.html", grafo = grafo, form = form, nodos = getattr(grafo,'vertices'), tipo = grafo.tipo.data, nombre = grafo.nombre.data, etiquetas = grafo.nodos.data, etiquetado = grafo.etiquetado.data, vectores = getattr(grafo,'vectores'),resultado= Ar)
 
         elif form.tarea.data == 'actualizar':
             grafo.vectores.clear()
