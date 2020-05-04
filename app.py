@@ -90,7 +90,7 @@ def tarea1():
             N=cant_nodos(G)+1 #Cantidad de nodos
             Matriz(G, N)  #Implementacion conexo
 
-        elif form.tarea.data == 'kruskal': 
+        elif form.tarea.data == 'arbol': 
             #Si lo que entra es una lista de etiquetas
             if(grafo.nodos.data).isdigit() == True:
                 #AristasNuevas = getattr(grafo,'vertices')
